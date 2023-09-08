@@ -20,14 +20,15 @@ bool Bag::useFood(Food& toUse) {
 }
 
 // Function to get details of the food in the bag as a string
-std::string Bag::getFood() {
-    std::vector<std::pair<int, std::string>> aviableFoodVector;
+std::vector<std::pair<std::string, int>> Bag::getFood() {
+    std::vector<std::pair<std::string, int>> aviableFoodVector;
 
     for (Food& food : foods) {
 
         bool inVector = false;
-        for (std::pair<int, std::string>& aviableFood : aviableFoodVector) {
-            if (aviableFood.second == food.getName()) {
+        for (std::pair<std::string, int>& aviableFood : aviableFoodVector) {
+            if (aviableFood.first == food.getName()) {
+                aviableFood.second++;
                 inVector = true;
                 break;
             }
@@ -35,16 +36,9 @@ std::string Bag::getFood() {
 
         // If it's not in the vector, add a new pair
         if (!inVector) {
-            aviableFoodVector.emplace_back(food.getHunger(), food.getName());
+            aviableFoodVector.emplace_back(food.getName(), 1);
         }
     }
 
-    // Create a string to store the data
-    std::string result;
-    result += "Name - Quantity\n";
-    for (std::pair<int, std::string>& aviableFood : aviableFoodVector) {
-        result += aviableFood.second + " - " + std::to_string(aviableFood.first)+"\n";
-    }
-
-    return result;
+    return aviableFoodVector;
 }

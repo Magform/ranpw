@@ -2,6 +2,7 @@
 #define Bag_H_
 
 #include <vector>
+#include <string>
 #include "Food.h"
 
 class Bag {
@@ -10,7 +11,7 @@ private:
 public:
     void addFood(Food& food);
     bool useFood(Food& toUse);
-    std::string getFood();
+    std::vector<std::pair<std::string, int>> getFood();
 };
 
 #endif // Bag_H_
