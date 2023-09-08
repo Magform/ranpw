@@ -10,8 +10,9 @@ class Food{
         std::string name;
         int hunger;
     public:
-        const virtual std::string getName();
-        const virtual int getHunger();
+        Food();
+        virtual std::string getName();
+        virtual int getHunger();
         Food randomFood();
 };
 

@@ -9,11 +9,11 @@ Food::Food() {
     hunger = 0;
 }
 
-const virtual std::string Food::getName(){
+std::string Food::getName(){
     return this->name;
 }
 
-const virtual int Food::getHunger(){
+int Food::getHunger(){
     return this->hunger;
 }
 
