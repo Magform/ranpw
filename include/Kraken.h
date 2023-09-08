@@ -6,6 +6,7 @@ class Kraken{
         int health;
         int hunger;
     public:
+        Kraken();
         int getHealth();
         int getHunger();
         void live();

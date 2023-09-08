@@ -1,5 +1,7 @@
 #include <cstdlib>  // For rand function
 #include <algorithm> // For std::max and std::min
+
+#include "mbed.h"
 #include "Kraken.h"
 
 Kraken::Kraken() {
