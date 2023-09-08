@@ -9,11 +9,11 @@ void Bag::addFood(Food& food) {
 
 // Function to use food from the bag
 bool Bag::useFood(Food& toUse) {
-    auto it = std::find(foods.begin(), foods.end(), toUse);
-    
-    if (it != foods.end()) {
-        foods.erase(it);
-        return true;
+    for (auto it = foods.begin(); it != foods.end(); ++it) {
+        if (it->getName() == toUse.getName()) {
+            foods.erase(it);
+            return true;
+        }
     }
 
     return false;
