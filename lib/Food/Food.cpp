@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "Food.h"
-#include "Apple.h"
+#include "Egg.h"
 #include "Pie.h"
 
 Food::Food() {
@@ -20,7 +20,7 @@ int Food::getHunger(){
 //Need to be updated if u add some other food tipes
 Food Food::randomFood() {
 
-    std::vector<Food*> foodTypes = {new Apple(), new Pie()};
+    std::vector<Food*> foodTypes = {new Egg(), new Pie()};
 
     int randomIndex = rand() % foodTypes.size();
     Food* randomFood = foodTypes[randomIndex];
