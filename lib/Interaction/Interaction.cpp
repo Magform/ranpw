@@ -1,6 +1,8 @@
 #include "Interaction.h"
 #include "mbed.h"
 #include <chrono>
+#include "Egg.h"
+#include "Pie.h"
 
 char krakenBTM[]  = {
     //Some Kraken Bitmap
@@ -48,7 +50,7 @@ void Interaction::start(Thread *krakenLife){
     lcd.printf("Hunger");
     lcd.rect(53,27,80,30,1);
     lcd.fillrect(52,27,54 + this->mainPage.kraken.getHunger(),30,1);
-    
+
     krakenLife->start(callback([&]() {this->mainPage.kraken.live();}));
 }
 
@@ -74,7 +76,12 @@ void Interaction::slider(vector<char*> options, std::function<void(int)> toRun, 
         selected = min(int(options.size()-1), max(selected, 0));
         if (this->joystick.center) {
             toRun(selected);
-            printMonitor(selected, options, true, submenu);
+            if(!submenu){
+                printMonitor(selected, options, true, submenu);
+            }
+            if(submenu){
+                return;
+            }
         }
         printMonitor(selected, options, false, submenu);
         ThisThread::sleep_for(std::chrono::milliseconds(10));
@@ -158,7 +165,7 @@ void Interaction::execute(int selected){
 
     }
     if(selected == 2){
-
+        
     }
     if(selected == 3){
         lcd.cls();
@@ -182,5 +189,10 @@ void Interaction::execute(int selected){
 
 
 void Interaction::useFood(int selected){
-
+    if(selected == 0){
+        this->mainPage.kraken.addHunger(this->mainPage.menu.bag.useFood("Egg"));
+    }
+    if(selected == 1){
+        this->mainPage.kraken.addHunger(this->mainPage.menu.bag.useFood("Pie"));
+    }
 }
