@@ -3,17 +3,17 @@
 
 
 class Credits {
-public:
-    char* getName() {
-        return authorName;
-    }
-    char* getAlias() {
-        return authorAlias;
-    }
+    public:
+        char* getName() {
+            return authorName;
+        }
+        char* getAlias() {
+            return authorAlias;
+        }
 
-private:
-    char* authorName = "Nicolas Ferraresso";
-    char* authorAlias = "Magform";
+    private:
+        char* authorName = "Nicolas Ferraresso";
+        char* authorAlias = "Magform";
 };
 
 #endif //Credits_H_
