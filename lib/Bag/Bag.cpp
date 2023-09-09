@@ -2,21 +2,22 @@
 #include <algorithm>
 #include <utility>
 
+
 // Function to add food to the bag
 void Bag::addFood(Food& food) {
     foods.push_back(food);
 }
 
 // Function to use food from the bag
-bool Bag::useFood(Food& toUse) {
+int Bag::useFood(std::string foodName) {
     for (auto it = foods.begin(); it != foods.end(); ++it) {
-        if (it->getName() == toUse.getName()) {
-            foods.erase(it);
-            return true;
+        if (it->getName() == foodName) {
+            int hunger = it->getHunger();
+            it = foods.erase(it);
+            return hunger;
         }
     }
-
-    return false;
+    return 0;
 }
 
 // Function to get details of the food in the bag as a string

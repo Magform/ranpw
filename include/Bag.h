@@ -7,10 +7,10 @@
 
 class Bag {
 private:
-    std::vector<Food> foods;
+   std::vector<Food> foods;
 public:
     void addFood(Food& food);
-    bool useFood(Food& toUse);
+    int useFood(std::string foodName);
     std::vector<std::pair<std::string, int>> getFood();
 };
 
