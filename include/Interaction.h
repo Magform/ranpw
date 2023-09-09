@@ -1,17 +1,9 @@
-#ifndef GUI_H_
-#define GUI_H_
+#ifndef Interaction_H_
+#define Interaction_H_
 
 #include "mbed.h"
 #include <C12832.h>
 #include "Page.h"
-
-struct Joystick{
-    DigitalIn left;
-    DigitalIn up;
-    DigitalIn right;
-    DigitalIn down;
-    DigitalIn center;
-};
 
 class Interaction{
     private:
@@ -28,10 +20,11 @@ class Interaction{
         void execute(int selected);
         void slider(vector<char*> options, std::function<void(int)> toRun, bool submenu = false);
         void useFood(int selected);
+        void useApp(int selected);
     public:
         Interaction();
         void start(Thread *krakenLife);
         void mainWork();
 };
 
-#endif //GUI_H_
+#endif //Interaction_H_

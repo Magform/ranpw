@@ -12,7 +12,9 @@ Interaction::Interaction() :
     lcd(p5, p7, p6, p8, p11), 
     joystick{p13, p15, p16, p12, p14},
     potentiometerBottom(p19),
-    potentiometerUp(p20) {
+    potentiometerUp(p20),
+    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14})
+    {
 }
 
 void Interaction::start(Thread *krakenLife){
@@ -165,24 +167,29 @@ void Interaction::execute(int selected){
 
     }
     if(selected == 2){
-        
-    }
-    if(selected == 3){
         lcd.cls();
         while(1){
             if(this->joystick.left){
                 return;
             }
-            //Left Arrow
-            lcd.line(3,16,10,12,1);
-            lcd.line(3,16,10,20,1);
-            lcd.line(10,12,10,20,1);
-            //Credits
-            lcd.locate(50, 2);
-            lcd.printf(this->mainPage.menu.credits.getAlias());
-            lcd.locate(30, 12);
-            lcd.printf(this->mainPage.menu.credits.getName());
-            ThisThread::sleep_for(std::chrono::milliseconds(10));
+            this->slider({"Cron"}, [this](int selected) { this->useApp(selected); }, true);
+        }
+    }
+    if(selected == 3){
+        lcd.cls();
+        //Left Arrow
+        lcd.line(3,16,10,12,1);
+        lcd.line(3,16,10,20,1);
+        lcd.line(10,12,10,20,1);
+        //Credits
+        lcd.locate(50, 2);
+        lcd.printf(this->mainPage.menu.credits.getAlias());
+        lcd.locate(30, 12);
+        lcd.printf(this->mainPage.menu.credits.getName());
+        while(1){
+            if(this->joystick.left){
+                return;
+            }
         }
     }
 }
@@ -194,5 +201,11 @@ void Interaction::useFood(int selected){
     }
     if(selected == 1){
         this->mainPage.kraken.addHunger(this->mainPage.menu.bag.useFood("Pie"));
+    }
+}
+
+void Interaction::useApp(int selected){
+    if(selected == 0){
+        this->mainPage.menu.app.cronometer.startingPage();
     }
 }
