@@ -5,16 +5,16 @@
 #include "Kraken.h"
 
 Kraken::Kraken() {
-    health = 25;
-    hunger = 25;
+    health.setValue(25);
+    hunger.setValue(25);
 }
 
 int Kraken::getHealth(){
-    return health;
+    return health.getValue();
 }
 
 int Kraken::getHunger(){
-    return hunger;
+    return hunger.getValue();
 }
 
 // This function is intended to be run in a different thread.
@@ -31,30 +31,30 @@ void Kraken::live(){
             checkNumber = 0;
             minutesHunger = rand() % 5 + 1;
             int hungerLoss = rand() % 5 + 1;
-            hunger -= hungerLoss;
-            if(hunger <= 0){
+            hunger.addValue(-hungerLoss);
+            if(hunger.getValue() <= 0){
                 int healthLoss = rand() % 3 + 1;
-                health -= healthLoss;
-                if(health <= 0){
+                health.addValue(-healthLoss);
+                if(health.getValue() <= 0){
                     //Death (to be configured...)
                 }
             }
         }
 
-        if (hunger >= 20) {
-            health += 1;
+        if (hunger.getValue() >= 20) {
+            health.addValue(1);
         }
 
         // Ensure hunger and health values stay within bounds (0-25)
-        hunger = std::max(0, std::min(25, hunger));
-        health = std::max(0, std::min(25, health));
+        hunger.setValue(std::max(0, std::min(25, hunger.getValue())));
+        health.setValue(std::max(0, std::min(25, health.getValue())));
 
         checkNumber++;
-        ThisThread::sleep_for(6s);
+        ThisThread::sleep_for(60s);
     }
 }
 
-int Kraken::addHunger(int hunger){
-    this->hunger += hunger;
-    hunger = std::max(0, std::min(25, hunger));
+void Kraken::addHunger(int hungerToAdd){
+    hunger.addValue(hungerToAdd);
+    hunger.setValue(std::max(0, std::min(25, hunger.getValue())));
 }
