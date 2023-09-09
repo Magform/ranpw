@@ -4,9 +4,9 @@
 #include "Egg.h"
 #include "Pie.h"
 
-Food::Food() {
-    name = "UNK";
-    hunger = 0;
+Food::Food(std::string foodName, int foodHunger)
+    : name(foodName), hunger(foodHunger) {
+
 }
 
 std::string Food::getName(){
@@ -25,9 +25,7 @@ Food Food::randomFood() {
     int randomIndex = rand() % foodTypes.size();
     Food* randomFood = foodTypes[randomIndex];
 
-    Food toReturn;
-    toReturn.name = randomFood->getName();
-    toReturn.hunger = randomFood->getHunger();
+    Food toReturn(randomFood->getName(), randomFood->getHunger());
     
     //clean memory
     for (Food* foodType : foodTypes) {
