@@ -164,7 +164,13 @@ void Interaction::execute(int selected){
         
     }
     if(selected == 1){
-
+        lcd.cls();
+        while(1){
+            if(this->joystick.left){
+                return;
+            }
+            this->slider({"LCatch"}, [this](int selected) { this->useGame(selected); }, true);
+        }
     }
     if(selected == 2){
         lcd.cls();
@@ -207,5 +213,16 @@ void Interaction::useFood(int selected){
 void Interaction::useApp(int selected){
     if(selected == 0){
         this->mainPage.menu.app.cronometer.startingPage();
+    }
+}
+
+void Interaction::useGame(int selected){
+    if(selected == 0){
+        int addFood = this->mainPage.menu.game.lcatch.startingPage()/5;
+        for(int i = 0; i < addFood; i++){
+            Food tmpFood("UNK", 0);
+            tmpFood = tmpFood.randomFood();
+            this->mainPage.menu.bag.addFood(tmpFood);
+        }
     }
 }

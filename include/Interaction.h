@@ -21,6 +21,7 @@ class Interaction{
         void slider(vector<char*> options, std::function<void(int)> toRun, bool submenu = false);
         void useFood(int selected);
         void useApp(int selected);
+        void useGame(int selected);
     public:
         Interaction();
         void start(Thread *krakenLife);
