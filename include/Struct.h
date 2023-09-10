@@ -2,6 +2,7 @@
 #define Struct_H_
 
 #include "mbed.h"
+#include "ConcurrentData.h"
 
 struct Joystick {
     DigitalIn left;
@@ -24,6 +25,14 @@ struct ledPin{
     PinName led2;
     PinName led3;
     PinName led4;
+};
+
+struct dataToSave{
+    ConcurrentData* KrakenHealth;
+    ConcurrentData* oldKrakenHunger;
+    ConcurrentData* oldEgg;
+    ConcurrentData* oldPie;
+    ConcurrentData* oldLCatchHighScore;
 };
 
 #endif //Struct_H_
