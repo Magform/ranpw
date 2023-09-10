@@ -1,0 +1,20 @@
+#ifndef LCatch_H_
+#define LCatch_H_
+
+#include "Struct.h"
+#include <C12832.h>
+
+class LCatch{
+    private:
+        C12832 lcd;
+        Joystick joystick;
+        int highScore;
+        int main();
+        int game();
+        void randomAppear(int toAppear);
+    public:
+        LCatch(lcdPin lcdPin, Joystick joystickPin);
+        int startingPage();
+};
+
+#endif //LCatch_H_
