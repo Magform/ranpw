@@ -61,17 +61,8 @@ void Cronometer::main(){
             lcd.locate(40,14);
             lcd.printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
             started = false;
-        }else if(started && cicle%50 == 0){
-            lcd.cls();
-
-            //left arrow
-            lcd.line(5,1,5,7,1);
-            lcd.line(5,1,2,4,1);
-            lcd.line(2,4,5,7,1);
-
-            lcd.locate(50,0);
-            lcd.printf("Cronometer");
-
+        }else if(started){
+            lcd.fillrect(0,10,127,31,0);
             lcd.locate(40,14);
             lcd.printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
         }else if(joystick.left.read()){
@@ -79,7 +70,6 @@ void Cronometer::main(){
         }
         cicle++;
         last_button_state = button_state;
-        ThisThread::sleep_for(1ms);
     }
 }
 
