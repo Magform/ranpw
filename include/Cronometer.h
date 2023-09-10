@@ -2,22 +2,7 @@
 #define Cronometer_H_
 
 #include <C12832.h>
-
-struct Joystick {
-    DigitalIn left;
-    DigitalIn up;
-    DigitalIn right;
-    DigitalIn down;
-    DigitalIn center;
-};
-
-struct lcdPin{
-    PinName p1;
-    PinName p2;
-    PinName p3;
-    PinName p4;
-    PinName p5;
-};
+#include "Struct.h"
 
 class Cronometer{
     private:
