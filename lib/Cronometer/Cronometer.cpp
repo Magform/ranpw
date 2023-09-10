@@ -3,7 +3,7 @@
 std::string convertFromNanoMilliseconds(std::chrono::microseconds input);
 
 Cronometer::Cronometer(lcdPin lcdPin, Joystick joystickPin) : 
-    lcd(lcdPin.p1, lcdPin.p2, lcdPin.p3, lcdPin.p4, lcdPin.p5),
+    lcd(lcdPin.MOSI, lcdPin.SCK, lcdPin.RESET, lcdPin.A0, lcdPin.nCS),
     joystick(joystickPin){
 }
 
