@@ -18,7 +18,7 @@ int LCatch::startingPage(){
     lcd.locate(50,0);
     lcd.printf("LCatch");
     lcd.locate(0,10);
-    lcd.printf("Press the joistick button corresponding to the number");
+    lcd.printf("Press the joystick button corresponding to the number");
     ThisThread::sleep_for(100ms);
     while(1){
         if(joystick.center.read()){
@@ -35,7 +35,7 @@ int LCatch::startingPage(){
             lcd.locate(50,0);
             lcd.printf("LCatch");
             lcd.locate(25,15);
-            lcd.printf("5 points = 1 food");
+            lcd.printf("10 points = 1 food");
 
             ThisThread::sleep_for(100ms);
             while(1){
@@ -157,80 +157,19 @@ int LCatch::game(){
     bool lost = false;
 
     while(!lost){
-        int counting = 0;
         int randomNumber = rand() % 4;
         if(randomNumber == 0){
             randomAppear(1);
-            bool find = false;
-            while(counting < 300 && !find){
-                if(joystick.up.read()){
-                    score++;
-                    find = true;
-                }
-                counting++;
-                ThisThread::sleep_for(1ms);
-            }
-            if(!find){
-                lost = true;
-            }else{
-                lcd.fillrect(0,12,127,31,0);
-                lcd.locate(48,12);
-                lcd.printf("Score: %d", score);
-            }
+            buttonWait(joystick.up, &score, &lost);
         }else if(randomNumber == 1){
             randomAppear(2);
-            bool find = false;
-            while(counting < 300 && !find){
-                if(joystick.left.read()){
-                    score++;
-                    find = true;
-                }
-                counting++;
-                ThisThread::sleep_for(1ms);
-            }
-            if(!find){
-                lost = true;
-            }else{
-                lcd.fillrect(0,12,127,31,0);
-                lcd.locate(48,12);
-                lcd.printf("Score: %d", score);
-            }
+            buttonWait(joystick.left, &score, &lost);
         }else if(randomNumber == 2){
             randomAppear(3);
-            bool find = false;
-            while(counting < 300 && !find){
-                if(joystick.right.read()){
-                    score++;
-                    find = true;
-                }
-                counting++;
-                ThisThread::sleep_for(1ms);
-            }
-            if(!find){
-                lost = true;
-            }else{
-                lcd.fillrect(0,12,127,31,0);
-                lcd.locate(48,12);
-                lcd.printf("Score: %d", score);
-            }
+            buttonWait(joystick.right, &score, &lost);
         }else if(randomNumber == 3){
             randomAppear(4);
-            bool find = false;
-            while(counting < 300 && !find){
-                if(joystick.down.read()){
-                    score++;
-                    find = true;
-                }
-                counting++;
-                ThisThread::sleep_for(1ms);
-            }
-            if(!find){
-                lost = true;
-            }else{
-                lcd.fillrect(0,12,127,31,0);
-                lcd.locate(48,12);
-                lcd.printf("Score: %d", score);
-            }
+            buttonWait(joystick.down, &score, &lost);
         }
 
     }
@@ -251,6 +190,31 @@ int LCatch::game(){
         if(joystick.center.read()){
             return score;
         }
+    }
+}
+
+void LCatch::buttonWait(DigitalIn button, int* score, bool* lost){
+    bool find = false;
+    int counting = 0;
+    static bool pastButtonState = false;
+    bool actualButtonState = false;
+    while(counting < 400-((*score)*10) && !find){
+        actualButtonState = button.read();
+        if(actualButtonState && !pastButtonState){
+            *score = *score + 1;
+            pastButtonState = actualButtonState;
+            find = true;
+        }
+        counting++;
+        pastButtonState = actualButtonState;
+        ThisThread::sleep_for(1ms);
+    }
+    if(!find){
+        *lost = true;
+    }else{
+        lcd.fillrect(0,12,127,31,0);
+        lcd.locate(48,12);
+        lcd.printf("Score: %d", *score);
     }
 }
 
