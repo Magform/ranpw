@@ -37,7 +37,7 @@ void Interaction::start(Thread *krakenLife){
     lcd.line(109,30,104,25,1);
     lcd.line(104,25,114,25,1);
 
-    //Write frist data
+    //Write first data
     lcd.locate(95,12);
     lcd.printf("Bag");
 
@@ -119,7 +119,7 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
             lcd.line(104,25,114,25,1);
         }
         
-        //Write frist data
+        //Write first data
         lcd.locate(95,12);
         lcd.printf("%s", options[selected]);
 
@@ -169,7 +169,7 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            this->slider({"LCatch"}, [this](int selected) { this->useGame(selected); }, true);
+            this->slider({"LCatch", "Pong"}, [this](int selected) { this->useGame(selected); }, true);
         }
     }
     if(selected == 2){
@@ -217,8 +217,16 @@ void Interaction::useApp(int selected){
 }
 
 void Interaction::useGame(int selected){
-    if(selected == 0){
-        int addFood = this->mainPage.menu.game.lcatch.startingPage()/5;
+    // if(selected == 0){
+    //     int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
+    //     for(int i = 0; i < addFood; i++){
+    //         Food tmpFood("UNK", 0);
+    //         tmpFood = tmpFood.randomFood();
+    //         this->mainPage.menu.bag.addFood(tmpFood);
+    //     }
+    // }
+    if(selected == 1){
+        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
         for(int i = 0; i < addFood; i++){
             Food tmpFood("UNK", 0);
             tmpFood = tmpFood.randomFood();
