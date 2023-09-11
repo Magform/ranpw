@@ -20,19 +20,20 @@ struct lcdPin{
     PinName nCS;
 };
 
-struct ledPin{
-    PinName led1;
-    PinName led2;
-    PinName led3;
-    PinName led4;
-};
-
-struct dataToSave{
+struct CDataToSave{
     ConcurrentData* KrakenHealth;
-    ConcurrentData* oldKrakenHunger;
-    ConcurrentData* oldEgg;
-    ConcurrentData* oldPie;
-    ConcurrentData* oldLCatchHighScore;
+    ConcurrentData* KrakenHunger;
+    ConcurrentData* Egg;
+    ConcurrentData* Pie;
+    ConcurrentData* LCatchHighScore;
+
+    CDataToSave() {
+        KrakenHealth = new ConcurrentData();
+        KrakenHunger = new ConcurrentData();
+        Egg = new ConcurrentData();
+        Pie = new ConcurrentData();
+        LCatchHighScore = new ConcurrentData();
+    }
 };
 
 #endif //Struct_H_
