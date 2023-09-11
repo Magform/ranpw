@@ -1,7 +1,9 @@
 #include "ConcurrentData.h"
 
 ConcurrentData::ConcurrentData(int initialData) {
+    dataMutex.lock();
     data = initialData;
+    dataMutex.unlock();
 }
 
 int ConcurrentData::getValue() {
