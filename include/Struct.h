@@ -12,7 +12,7 @@ struct Joystick {
     DigitalIn center;
 };
 
-struct lcdPin{
+struct LcdPin{
     PinName MOSI;
     PinName SCK;
     PinName RESET;
@@ -20,14 +20,14 @@ struct lcdPin{
     PinName nCS;
 };
 
-struct CDataToSave{
+struct DataToSave{
     ConcurrentData* KrakenHealth;
     ConcurrentData* KrakenHunger;
     ConcurrentData* Egg;
     ConcurrentData* Pie;
     ConcurrentData* LCatchHighScore;
 
-    CDataToSave() {
+    DataToSave() {
         KrakenHealth = new ConcurrentData();
         KrakenHunger = new ConcurrentData();
         Egg = new ConcurrentData();
