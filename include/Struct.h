@@ -27,6 +27,11 @@ struct ledPin{
     PinName led4;
 };
 
+struct tempPin{
+    PinName SCL;
+    PinName SDA;
+};
+
 struct dataToSave{
     ConcurrentData* KrakenHealth;
     ConcurrentData* oldKrakenHunger;

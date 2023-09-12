@@ -13,7 +13,7 @@ Interaction::Interaction() :
     joystick{p13, p15, p16, p12, p14},
     potentiometerBottom(p19),
     potentiometerUp(p20),
-    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14})
+    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14}, {p28, p27})
     {
 }
 
@@ -28,10 +28,7 @@ void Interaction::start(Thread *krakenLife){
     lcd.copy_to_lcd();
     //Separation Line
     lcd.line(90,0,90,32,1);
-    //Up arrow
-    lcd.line(109,3,114,8,1);
-    lcd.line(109,3,104,8,1);
-    lcd.line(104,8,114,8,1);
+
     //Down arrow
     lcd.line(109,30,114,25,1);
     lcd.line(109,30,104,25,1);
@@ -178,7 +175,7 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            this->slider({"Cron"}, [this](int selected) { this->useApp(selected); }, true);
+            this->slider({"Cron", "Temp"}, [this](int selected) { this->useApp(selected); }, true);
         }
     }
     if(selected == 3){
@@ -212,25 +209,28 @@ void Interaction::useFood(int selected){
 
 void Interaction::useApp(int selected){
     if(selected == 0){
-        this->mainPage.menu.app.cronometer.startingPage();
+        // this->mainPage.menu.app.cronometer.startingPage();
+    }
+    if(selected == 0){
+        this->mainPage.menu.app.termometer.startingPage();
     }
 }
 
 void Interaction::useGame(int selected){
-    // if(selected == 0){
-    //     int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
-    //     for(int i = 0; i < addFood; i++){
-    //         Food tmpFood("UNK", 0);
-    //         tmpFood = tmpFood.randomFood();
-    //         this->mainPage.menu.bag.addFood(tmpFood);
-    //     }
-    // }
-    if(selected == 1){
-        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+    if(selected == 0){
+        int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
         for(int i = 0; i < addFood; i++){
             Food tmpFood("UNK", 0);
             tmpFood = tmpFood.randomFood();
             this->mainPage.menu.bag.addFood(tmpFood);
         }
     }
+    // if(selected == 1){
+    //     int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+    //     for(int i = 0; i < addFood; i++){
+    //         Food tmpFood("UNK", 0);
+    //         tmpFood = tmpFood.randomFood();
+    //         this->mainPage.menu.bag.addFood(tmpFood);
+    //     }
+    // }
 }

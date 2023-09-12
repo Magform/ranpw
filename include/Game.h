@@ -6,11 +6,10 @@
 
 class Game{
     public:
-       // LCatch lcatch;
-        Pong pong;
+        LCatch lcatch;
+        //Pong pong;
         Game(lcdPin lcdPin, Joystick joystick);
 };
 
-inline Game::Game(lcdPin lcdPin, Joystick joystick) : pong(lcdPin, joystick) {}
-
+inline Game::Game(lcdPin lcdPin, Joystick joystick) : lcatch(lcdPin, joystick){}
 #endif //Game_H_
