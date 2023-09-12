@@ -12,7 +12,7 @@ struct Joystick {
     DigitalIn center;
 };
 
-struct LcdPin{
+struct lcdPin{
     PinName MOSI;
     PinName SCK;
     PinName RESET;
