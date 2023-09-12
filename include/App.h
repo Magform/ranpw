@@ -7,10 +7,10 @@
 class App{
     public:
         Cronometer cronometer;
-        Temp termometer;
+        //Temp termometer;
         App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin);
 };
 
-inline App::App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin) : termometer(lcdPin, joystick, tempSensorPin) {}
+inline App::App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin) : cronometer(lcdPin, joy) {}
 
 #endif // App_H_

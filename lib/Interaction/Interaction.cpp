@@ -209,10 +209,10 @@ void Interaction::useFood(int selected){
 
 void Interaction::useApp(int selected){
     if(selected == 0){
-        // this->mainPage.menu.app.cronometer.startingPage();
+         this->mainPage.menu.app.cronometer.startingPage();
     }
     if(selected == 0){
-        this->mainPage.menu.app.termometer.startingPage();
+        // this->mainPage.menu.app.termometer.startingPage();
     }
 }
 

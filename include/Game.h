@@ -7,7 +7,7 @@
 class Game{
     public:
         LCatch lcatch;
-        //Pong pong;
+        // Pong pong;
         Game(lcdPin lcdPin, Joystick joystick);
 };
 
