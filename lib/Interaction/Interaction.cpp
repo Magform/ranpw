@@ -28,10 +28,7 @@ void Interaction::start(Thread *krakenLife){
     lcd.copy_to_lcd();
     //Separation Line
     lcd.line(90,0,90,32,1);
-    //Up arrow
-    lcd.line(109,3,114,8,1);
-    lcd.line(109,3,104,8,1);
-    lcd.line(104,8,114,8,1);
+
     //Down arrow
     lcd.line(109,30,114,25,1);
     lcd.line(109,30,104,25,1);
