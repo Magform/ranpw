@@ -20,6 +20,18 @@ struct lcdPin{
     PinName nCS;
 };
 
+struct ledPin{
+    PinName led1;
+    PinName led2;
+    PinName led3;
+    PinName led4;
+};
+
+struct tempPin{
+    PinName SCL;
+    PinName SDA;
+};
+
 struct DataToSave{
     ConcurrentData* KrakenHealth;
     ConcurrentData* KrakenHunger;

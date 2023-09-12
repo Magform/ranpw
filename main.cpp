@@ -1,6 +1,13 @@
 #include "mbed.h"
 #include "Interaction.h"
 
+
+
+//To add:
+//Pong in Game
+//Temp in App
+//DataToSave
+
 //Known porblem
 // it'seem that I cant make 2 game and I dont knwo way
 // for some reason initializing DataSaver bring same problem
