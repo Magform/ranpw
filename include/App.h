@@ -11,6 +11,6 @@ class App{
         App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin);
 };
 
-inline App::App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin) : cronometer(lcdPin, joy) {}
+inline App::App(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin) : cronometer(lcdPin, joystick) {}
 
 #endif // App_H_
