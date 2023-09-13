@@ -19,7 +19,7 @@ int Kraken::getHunger(){
 
 // This function is intended to be run in a different thread.
 // Every 1-5 minutes, it loses 1-5 hunger points. If hunger reaches 0, it loses 1-3 health points.
-// Every 1 minute, it recovers 1 health point if hunger is greater than 15.
+// Every 1 minute, it recovers 1 health point if hunger is greater than 20.
 void Kraken::live(){
     int checkNumber = 0;
     
