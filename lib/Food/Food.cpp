@@ -1,4 +1,7 @@
+//For doxygen-style documentation see Food.h
+
 #include <vector>
+#include <memory>
 
 #include "Food.h"
 #include "Egg.h"
@@ -17,9 +20,12 @@ int Food::getHunger(){
     return this->hunger;
 }
 
-//Need to be updated if u add some other food tipes
+//Need to be updated if other food is added
+//In particular foodTypes need also the new Constructor
+//PS. This function can be upgraded using smartpointers
 Food Food::randomFood() {
 
+    //Vector that contains all types of food that we want to be able to generate
     std::vector<Food*> foodTypes = {new Egg(), new Pie()};
 
     int randomIndex = rand() % foodTypes.size();
@@ -27,10 +33,11 @@ Food Food::randomFood() {
 
     Food toReturn(randomFood->getName(), randomFood->getHunger());
     
-    //clean memory
+    //clean memory alocated with pointers
     for (Food* foodType : foodTypes) {
         delete foodType;
     }
+    delete randomFood;
 
     return toReturn;
 }
