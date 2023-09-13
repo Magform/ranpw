@@ -7,9 +7,13 @@
 class Game{
     public:
         LCatch lcatch;
-        // Pong pong;
+        Pong pong;
         Game(lcdPin lcdPin, Joystick joystick);
-};
+        Game(lcdPin* lcdPin, Joystick* joystick); 
+};      
 
-inline Game::Game(lcdPin lcdPin, Joystick joystick) : lcatch(lcdPin, joystick){}
+inline Game::Game(lcdPin lcdPin, Joystick joystick) : lcatch(lcdPin, joystick), pong(lcdPin, joystick){}
+
+inline Game::Game(lcdPin* lcdPin, Joystick* joystick) : lcatch(*lcdPin, *joystick), pong(*lcdPin, *joystick){}
+
 #endif //Game_H_
