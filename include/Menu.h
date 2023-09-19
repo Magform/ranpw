@@ -16,6 +16,6 @@ class Menu{
 };
 
 inline Menu::Menu(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin) : 
-    app(lcdPin, joystick, tempSensorPin), game(&lcdPin, &joystick){}
+    app(lcdPin, joystick, tempSensorPin), game(lcdPin, joystick){}
 
 #endif //Menu_H_
