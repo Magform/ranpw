@@ -173,7 +173,7 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            this->slider({"Cron", "Temp"}, [this](int selected) { this->useApp(selected); }, true);
+            this->slider({"No"}, [this](int selected) { this->useApp(selected); }, true);
         }
     }
     if(selected == 3){
@@ -184,9 +184,9 @@ void Interaction::execute(int selected){
         lcd.line(10,12,10,20,1);
         //Credits
         lcd.locate(50, 2);
-        lcd.printf(this->mainPage.menu.credits.getAlias());
+        lcd.printf("Magform");
         lcd.locate(30, 12);
-        lcd.printf(this->mainPage.menu.credits.getName());
+        lcd.printf("Nicolas Ferraresso");
         while(1){
             if(this->joystick.left){
                 return;
@@ -206,12 +206,12 @@ void Interaction::useFood(int selected){
 }
 
 void Interaction::useApp(int selected){
-    if(selected == 0){
-        this->mainPage.menu.app.cronometer.startingPage();
-    }
-    if(selected == 0){
-        // this->mainPage.menu.app.termometer.startingPage();
-    }
+    // if(selected == 0){
+    //     this->mainPage.menu.app.cronometer.startingPage();
+    // }
+    // if(selected == 0){
+    //     this->mainPage.menu.app.termometer.startingPage();
+    // }
 }
 
 void Interaction::useGame(int selected){
