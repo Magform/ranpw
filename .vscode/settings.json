@@ -4,4 +4,5 @@
         "string": "cpp"
     },
     "cmake.buildDirectory": "${workspaceFolder}/build/${variant:board}-${variant:buildType}",
+    "cmake.configureOnOpen": true,
 }
