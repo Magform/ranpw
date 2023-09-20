@@ -2,5 +2,6 @@
     "files.associations": {
         "vector": "cpp",
         "string": "cpp"
-    }
+    },
+    "cmake.buildDirectory": "${workspaceFolder}/build/${variant:board}-${variant:buildType}",
 }

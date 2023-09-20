@@ -109,3 +109,16 @@ Testing/
 # Library file
 LM75B/.hg/*
 BUILD/*
+
+#Ninja things
+*.bin
+*.elf
+*.map
+*.hex
+.ninja_log
+.ninja_deps
+.mbedignore
+build.ninja
+*.cmake
+*.ld
+.mbed
