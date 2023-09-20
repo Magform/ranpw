@@ -12,9 +12,6 @@ class Interaction{
         Joystick joystick; 
         DigitalIn potentiometerBottom;
         DigitalIn potentiometerUp;
-        // WiFi
-        // Speacker
-        // Acceleroment
         void printMonitor(int selected, vector<char*> options, bool reload = false, bool submenu = false);
         void execute(int selected);
         void slider(vector<char*> options, std::function<void(int)> toRun, bool submenu = false);

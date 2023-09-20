@@ -1,24 +1,19 @@
 #include "mbed.h"
 #include "Interaction.h"
-
+#include "DataSaver.h"
 
 
 //To add:
-//Pong in Game
+//Locky in App
 //Temp in App
 //DataToSave
 
-//Known porblem
-// it'seem that I cant make 2 game and I dont knwo way
-// for some reason initializing DataSaver bring same problem
-
+Interaction inte;
 
 int main(){
-
-    Interaction inte;
     Thread krakenLifeThread;
     Thread menuThread;
-    // //Thread dataSaverThread;
+    //Thread dataSaverThread;
 
     DataToSave toSave;
 
@@ -26,7 +21,8 @@ int main(){
     
     menuThread.start(callback([&]() {inte.mainWork();}));
 
-    // //DataSaver kk("test" ,toSave , &dataSaverThread);
+    //DataSaver test;
+    //DataSaver kk("test" ,toSave , &dataSaverThread);
 
     while(1){
     }
