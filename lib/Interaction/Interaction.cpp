@@ -209,7 +209,7 @@ void Interaction::useFood(int selected){
 
 void Interaction::useApp(int selected){
     if(selected == 0){
-         this->mainPage.menu.app.cronometer.startingPage();
+        this->mainPage.menu.app.cronometer.startingPage();
     }
     if(selected == 0){
         // this->mainPage.menu.app.termometer.startingPage();
@@ -225,12 +225,12 @@ void Interaction::useGame(int selected){
             this->mainPage.menu.bag.addFood(tmpFood);
         }
     }
-    // if(selected == 1){
-    //     int addFood = this->mainPage.menu.game.pong.startingPage()*2;
-    //     for(int i = 0; i < addFood; i++){
-    //         Food tmpFood("UNK", 0);
-    //         tmpFood = tmpFood.randomFood();
-    //         this->mainPage.menu.bag.addFood(tmpFood);
-    //     }
-    // }
+    if(selected == 1){
+        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+        for(int i = 0; i < addFood; i++){
+            Food tmpFood("UNK", 0);
+            tmpFood = tmpFood.randomFood();
+            this->mainPage.menu.bag.addFood(tmpFood);
+        }
+    }
 }
