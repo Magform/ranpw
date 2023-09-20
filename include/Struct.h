@@ -32,6 +32,11 @@ struct tempPin{
     PinName SDA;
 };
 
+struct Potentiometer{
+    PinName up;
+    PinName down;
+};
+
 struct DataToSave{
     ConcurrentData* KrakenHealth;
     ConcurrentData* KrakenHunger;

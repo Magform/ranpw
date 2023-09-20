@@ -11,9 +11,7 @@ char krakenBTM[]  = {
 Interaction::Interaction() : 
     lcd(p5, p7, p6, p8, p11), 
     joystick{p13, p15, p16, p12, p14},
-    potentiometerBottom(p19),
-    potentiometerUp(p20),
-    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14}, {p28, p27})
+    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14}, {p28, p27}, {p20, p19})
     {
 }
 
@@ -166,7 +164,7 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            this->slider({"LCatch", "Pong"}, [this](int selected) { this->useGame(selected); }, true);
+            this->slider({"LCatch", "Pong", "LockY"}, [this](int selected) { this->useGame(selected); }, true);
         }
     }
     if(selected == 2){
@@ -227,6 +225,14 @@ void Interaction::useGame(int selected){
     }
     if(selected == 1){
         int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+        for(int i = 0; i < addFood; i++){
+            Food tmpFood("UNK", 0);
+            tmpFood = tmpFood.randomFood();
+            this->mainPage.menu.bag.addFood(tmpFood);
+        }
+    }
+    if(selected == 2){
+        int addFood = this->mainPage.menu.game.locky.startingPage()/100;
         for(int i = 0; i < addFood; i++){
             Food tmpFood("UNK", 0);
             tmpFood = tmpFood.randomFood();

@@ -16,6 +16,7 @@ add_subdirectory(LM75B)
 
 # Build application
 set(RANPW_SOURCES
+    lib/LockY/LockY.cpp
     lib/Bag/Bag.cpp
     lib/ConcurrentData/ConcurrentData.cpp
     lib/Cronometer/Cronometer.cpp

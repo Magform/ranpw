@@ -12,10 +12,10 @@ class Menu{
         Bag bag;
         App app;
         Game game;
-        Menu(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin);
+        Menu(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 };
 
-inline Menu::Menu(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin) : 
-    app(lcdPin, joystick, tempSensorPin), game(lcdPin, joystick){}
+inline Menu::Menu(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer) : 
+    app(lcdPin, joystick, tempSensorPin), game(lcdPin, joystick, potentiometer){}
 
 #endif //Menu_H_

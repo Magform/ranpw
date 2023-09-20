@@ -8,11 +8,11 @@ class Page{
     public:
         Kraken kraken;
         Menu menu;
-        Page(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin);
+        Page(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 
 };
 
-inline Page::Page(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin) : menu(lcdPin, joystick, tempSensorPin) {}
+inline Page::Page(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : menu(lcdPin, joystick, tempSensorPin, potentiometer) {}
 
 
 #endif //Page_H_
