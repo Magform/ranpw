@@ -1,8 +1,6 @@
 #include "Interaction.h"
 #include "mbed.h"
 #include <chrono>
-#include "Egg.h"
-#include "Pie.h"
 
 char krakenBTM[]  = {
     //Some Kraken Bitmap
@@ -144,17 +142,17 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            int EggNumber = 0;
-            int PieNumber = 0;
-            for (std::pair<std::string, int>& aviableFood : this->mainPage.menu.bag.getFood()) {
-                if (aviableFood.first == "Egg") {
-                    EggNumber = aviableFood.second;
-                }
-                if (aviableFood.first == "Pie") {
-                    PieNumber = aviableFood.second;
-                }
-            }
-            this->slider({const_cast<char*>(("Egg " + std::to_string(EggNumber)).c_str()), const_cast<char*>(("Pie " + std::to_string(PieNumber)).c_str())}, [this](int selected) { this->useFood(selected); }, true);
+
+            char eggN[10] = "Egg: ";
+            char pieN[10] = "Pie: ";
+            char eggCountStr[10];
+            char pieCountStr[10];
+            snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
+            snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
+            strcat(eggN, eggCountStr);
+            strcat(pieN, pieCountStr);
+
+            this->slider({eggN, pieN}, [this](int selected) { this->useFood(selected); }, true);
         }
         
     }
@@ -198,10 +196,10 @@ void Interaction::execute(int selected){
 
 void Interaction::useFood(int selected){
     if(selected == 0){
-        this->mainPage.kraken.addHunger(this->mainPage.menu.bag.useFood("Egg"));
+        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
     }
     if(selected == 1){
-        this->mainPage.kraken.addHunger(this->mainPage.menu.bag.useFood("Pie"));
+        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
     }
 }
 
@@ -218,25 +216,19 @@ void Interaction::useGame(int selected){
     if(selected == 0){
         int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
         for(int i = 0; i < addFood; i++){
-            Food tmpFood("UNK", 0);
-            tmpFood = tmpFood.randomFood();
-            this->mainPage.menu.bag.addFood(tmpFood);
+            mainPage.menu.bag.addRandomFood();
         }
     }
     if(selected == 1){
         int addFood = this->mainPage.menu.game.pong.startingPage()*2;
         for(int i = 0; i < addFood; i++){
-            Food tmpFood("UNK", 0);
-            tmpFood = tmpFood.randomFood();
-            this->mainPage.menu.bag.addFood(tmpFood);
+            mainPage.menu.bag.addRandomFood();
         }
     }
     if(selected == 2){
         int addFood = this->mainPage.menu.game.locky.startingPage()/100;
         for(int i = 0; i < addFood; i++){
-            Food tmpFood("UNK", 0);
-            tmpFood = tmpFood.randomFood();
-            this->mainPage.menu.bag.addFood(tmpFood);
+            mainPage.menu.bag.addRandomFood();
         }
     }
 }

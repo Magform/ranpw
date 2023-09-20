@@ -1,17 +1,16 @@
 #ifndef Bag_H_
 #define Bag_H_
 
-#include <vector>
-#include <string>
-#include "Food.h"
 
 class Bag {
 private:
-   std::vector<Food> foods;
+    int Pie = 0;    //Food type 0
+    int Egg = 0;    //Food type 1
 public:
-    void addFood(Food& food);
-    int useFood(std::string foodName);
-    std::vector<std::pair<std::string, int>> getFood();
+    void addFood(int foodType);
+    int useFood(int foodType);
+    int getFood(int foodType);
+    void addRandomFood();
 };
 
 #endif // Bag_H_

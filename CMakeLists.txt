@@ -17,11 +17,11 @@ add_subdirectory(LM75B)
 # Build application
 set(RANPW_SOURCES
     lib/LockY/LockY.cpp
+    lib/DataSaver/DataSaver.cpp
     lib/Bag/Bag.cpp
     lib/ConcurrentData/ConcurrentData.cpp
     lib/Cronometer/Cronometer.cpp
     lib/DataSaver/DataSaver.cpp
-    lib/Food/Food.cpp
     lib/Interaction/Interaction.cpp
     lib/Kraken/Kraken.cpp
     lib/LCatch/LCatch.cpp
