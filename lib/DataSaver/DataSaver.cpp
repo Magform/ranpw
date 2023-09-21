@@ -1,13 +1,44 @@
 #include "DataSaver.h"
 
 #include "Struct.h"
-#include "FileSystem.h"
 
 int charOccurrency(char* str, char target);
 void encryptDecrypt(char *input, char key);
 
-DataSaver::DataSaver(const char* saveFileName, DataToSave toSave, Thread* startThread)
-    : saveFile(), oldKrakenHealth(25), oldKrakenHunger(25), oldEgg(0), oldPie(0), oldLCatchHighScore(0), dataToSave(toSave) {
+DataSaver::DataSaver(const char* saveFileNameP, DataToSave toSave, Thread* startThread)
+    : saveFile(), dataToSave(toSave) {
+
+        LocalFileSystem local("local");
+
+        //string concatenation to add /local/ in our fileName
+        char* tmpSaveFileName = new char[strlen("/local/") + strlen(saveFileNameP) + 1];
+        strcpy(tmpSaveFileName, "/local/");
+        strcat(tmpSaveFileName, saveFileNameP);
+        saveFileName = tmpSaveFileName;
+
+        saveFile =  fopen(saveFileName, "r");
+        if(saveFile == NULL){
+            saveData();
+        }else{
+            
+        }
+
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // char* data;
     // saveFile >> data;
@@ -35,7 +66,7 @@ DataSaver::DataSaver(const char* saveFileName, DataToSave toSave, Thread* startT
     // }
 
     // startThread->start(callback([&]() {this->start();}));
-}
+// }
 
 
 // void DataSaver::start() {
@@ -58,18 +89,20 @@ DataSaver::DataSaver(const char* saveFileName, DataToSave toSave, Thread* startT
 //     }
 // }
 
-// void DataSaver::saveData() {
-//     std::string data = to_string(oldKrakenHealth) + '|' +
-//                       to_string(oldKrakenHunger) + '|' +
-//                       to_string(oldEgg) + '|' +
-//                       to_string(oldPie) + '|' +
-//                       to_string(oldLCatchHighScore) + '|';
+void DataSaver::saveData() {
+    saveFile = fopen(saveFileName,"w");
+    std::string data = to_string(oldKrakenHealth) + '|' +
+                      to_string(oldKrakenHunger) + '|' +
+                      to_string(oldEgg) + '|' +
+                      to_string(oldPie) + '|' +
+                      to_string(oldLCatchHighScore) + '|';
 
-//     char* dataChar = strdup(data.c_str());
-//     encryptDecrypt(dataChar, key);
-//     saveFile << dataChar << std::endl;
-//     free(dataChar);
-// }
+    char* dataChar = strdup(data.c_str());
+    encryptDecrypt(dataChar, key);
+    fprintf(saveFile, dataChar);
+    free(dataChar);
+    fclose(saveFile);
+}
 
 // void DataSaver::pushOldValue(){
 //     dataToSave.KrakenHealth->setValue(oldKrakenHealth);
