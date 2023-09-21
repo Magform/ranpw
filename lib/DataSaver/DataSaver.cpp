@@ -1,48 +1,42 @@
 #include "DataSaver.h"
 
 #include "Struct.h"
+#include "FileSystem.h"
 
 int charOccurrency(char* str, char target);
 void encryptDecrypt(char *input, char key);
 
-// DataSaver::DataSaver(const char* saveFileName, CDataToSave toSave, Thread* startThread)
-//     : saveFile(saveFileName), oldKrakenHealth(25), oldKrakenHunger(25), oldEgg(0), oldPie(0), oldLCatchHighScore(0), dataToSave(toSave) {
-//     if (saveFile.is_open()) {
-//         char* data;
-//         saveFile >> data;
-//         if (!saveFile.fail()) {
-//             encryptDecrypt(data, key);
-//             if (charOccurrency(data, '|') == 4) {
-//                 char* value = strtok(data, "|");
-//                 oldKrakenHealth = std::stoi(value);
-//                 value = strtok(nullptr, "|");
-//                 oldKrakenHunger = std::stoi(value);
-//                 value = strtok(nullptr, "|");
-//                 oldEgg = std::stoi(value);
-//                 value = strtok(nullptr, "|");
-//                 oldPie = std::stoi(value);
-//                 value = strtok(nullptr, "|");
-//                 oldLCatchHighScore = std::stoi(value);
-//                 pushOldValue();
-//             } else {
-//                 saveData();
-//                 pushOldValue();
-//             }
-//         } else {
-//             saveData();
-//             pushOldValue();
-//         }
-//     } else {
-//         saveData();
-//         pushOldValue();
-//     }
-//     startThread->start(callback([&]() {this->start();}));
-// }
+DataSaver::DataSaver(const char* saveFileName, DataToSave toSave, Thread* startThread)
+    : saveFile(), oldKrakenHealth(25), oldKrakenHunger(25), oldEgg(0), oldPie(0), oldLCatchHighScore(0), dataToSave(toSave) {
 
-// DataSaver::DataSaver(const char* saveFileName, CDataToSave toSave, Thread* startThread){}
-DataSaver::DataSaver(){}
-// void DataSaver::saveData(){}
-// void DataSaver::pushOldValue(){}
+    // char* data;
+    // saveFile >> data;
+    // if (!saveFile.fail()) {
+    //     encryptDecrypt(data, key);
+    //     if (charOccurrency(data, '|') == 4) {
+    //         char* value = strtok(data, "|");
+    //         oldKrakenHealth = std::stoi(value);
+    //         value = strtok(nullptr, "|");
+    //         oldKrakenHunger = std::stoi(value);
+    //         value = strtok(nullptr, "|");
+    //         oldEgg = std::stoi(value);
+    //         value = strtok(nullptr, "|");
+    //         oldPie = std::stoi(value);
+    //         value = strtok(nullptr, "|");
+    //         oldLCatchHighScore = std::stoi(value);
+    //         pushOldValue();
+    //     } else {
+    //         saveData();
+    //         pushOldValue();
+    //     }
+    // } else {
+    //     saveData();
+    //     pushOldValue();
+    // }
+
+    // startThread->start(callback([&]() {this->start();}));
+}
+
 
 // void DataSaver::start() {
 //     while(1){
