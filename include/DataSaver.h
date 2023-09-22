@@ -9,9 +9,9 @@ class DataSaver{
     public:
         DataSaver(const char* saveFileNameP, DataToSave toSave, Thread* startThread);
     private:
-        // void pushOldValue();
+        void pushOldValue();
         void saveData();
-        // void start();
+        void start();
         FILE* saveFile;
         char key = 'm';
         int oldKrakenHealth = 25;
@@ -20,7 +20,7 @@ class DataSaver{
         int oldPie = 0;
         int oldLCatchHighScore = 0;
         int oldPongHighScore = 0;
-        int oldLockyHighScore = 0;
+        int oldLockYHighScore = 0;
         const char* saveFileName = nullptr;
         DataToSave dataToSave;
 };
