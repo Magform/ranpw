@@ -217,12 +217,12 @@ void Interaction::useGame(int selected){
             mainPage.menu.bag.addRandomFood();
         }
     }
-    // if(selected == 1){
-    //     int addFood = this->mainPage.menu.game.pong.startingPage()*2;
-    //     for(int i = 0; i < addFood; i++){
-    //         mainPage.menu.bag.addRandomFood();
-    //     }
-    // }
+    if(selected == 1){
+        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+        for(int i = 0; i < addFood; i++){
+            mainPage.menu.bag.addRandomFood();
+        }
+    }
     // if(selected == 2){
     //     int addFood = this->mainPage.menu.game.locky.startingPage()/100;
     //     for(int i = 0; i < addFood; i++){
