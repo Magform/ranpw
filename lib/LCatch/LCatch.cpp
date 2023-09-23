@@ -1,8 +1,11 @@
 #include "LCatch.h"
 
-LCatch::LCatch(lcdPin lcdPin, Joystick joystickPin) : 
+LCatch::LCatch(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystickPin) : 
     lcd(lcdPin.MOSI, lcdPin.SCK, lcdPin.RESET, lcdPin.A0, lcdPin.nCS),
-    joystick(joystickPin){}
+    joystick(joystickPin),
+    dataToSave(dataToBeSaved){
+    highScore = dataToSave.LCatchHighScore->getValue();
+}
 
 int LCatch::startingPage(){
     lcd.cls();
@@ -108,6 +111,7 @@ int LCatch::main(){
             int gamePoint = game();
             if(gamePoint > highScore){
                 highScore = gamePoint;
+                dataToSave.LCatchHighScore->setValue(highScore);
                 lcd.cls();
                 lcd.locate(35,15);
                 lcd.printf("NEW HIGHSCORE");

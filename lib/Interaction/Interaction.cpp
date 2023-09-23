@@ -211,12 +211,12 @@ void Interaction::useApp(int selected){
 }
 
 void Interaction::useGame(int selected){
-    // if(selected == 0){
-    //     int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
-    //     for(int i = 0; i < addFood; i++){
-    //         mainPage.menu.bag.addRandomFood();
-    //     }
-    // }
+    if(selected == 0){
+        int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
+        for(int i = 0; i < addFood; i++){
+            mainPage.menu.bag.addRandomFood();
+        }
+    }
     // if(selected == 1){
     //     int addFood = this->mainPage.menu.game.pong.startingPage()*2;
     //     for(int i = 0; i < addFood; i++){
