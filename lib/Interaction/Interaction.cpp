@@ -6,10 +6,10 @@ char krakenBTM[]  = {
     //Some Kraken Bitmap
   };
 
-Interaction::Interaction() : 
+Interaction::Interaction(DataToSave dataToBeSaved) : 
     lcd(p5, p7, p6, p8, p11), 
     joystick{p13, p15, p16, p12, p14},
-    mainPage({p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14}, {p28, p27}, {p20, p19})
+    mainPage(dataToBeSaved, {p5, p7, p6, p8, p11}, {p13, p15, p16, p12, p14}, {p28, p27}, {p20, p19})
     {
 }
 
@@ -18,10 +18,8 @@ void Interaction::start(Thread *krakenLife){
     lcd.locate(50, 10);
     lcd.printf("RANPW");
     ThisThread::sleep_for(std::chrono::milliseconds(500));
-    Bitmap krakenImageBitmap{25, 25 , 1 , krakenBTM};
+    
     lcd.cls();
-    lcd.print_bm(krakenImageBitmap,5 , 5);
-    lcd.copy_to_lcd();
     //Separation Line
     lcd.line(90,0,90,32,1);
 
@@ -143,16 +141,16 @@ void Interaction::execute(int selected){
                 return;
             }
 
-            char eggN[10] = "Egg: ";
-            char pieN[10] = "Pie: ";
-            char eggCountStr[10];
-            char pieCountStr[10];
-            snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
-            snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
-            strcat(eggN, eggCountStr);
-            strcat(pieN, pieCountStr);
+            // char eggN[10] = "Egg: ";
+            // char pieN[10] = "Pie: ";
+            // char eggCountStr[10];
+            // char pieCountStr[10];
+            // snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
+            // snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
+            // strcat(eggN, eggCountStr);
+            // strcat(pieN, pieCountStr);
 
-            this->slider({eggN, pieN}, [this](int selected) { this->useFood(selected); }, true);
+            // this->slider({eggN, pieN}, [this](int selected) { this->useFood(selected); }, true);
         }
         
     }
@@ -195,12 +193,12 @@ void Interaction::execute(int selected){
 
 
 void Interaction::useFood(int selected){
-    if(selected == 0){
-        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
-    }
-    if(selected == 1){
-        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
-    }
+    // if(selected == 0){
+    //     mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
+    // }
+    // if(selected == 1){
+    //     mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
+    // }
 }
 
 void Interaction::useApp(int selected){
@@ -213,22 +211,22 @@ void Interaction::useApp(int selected){
 }
 
 void Interaction::useGame(int selected){
-    if(selected == 0){
-        int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
-        for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
-        }
-    }
-    if(selected == 1){
-        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
-        for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
-        }
-    }
-    if(selected == 2){
-        int addFood = this->mainPage.menu.game.locky.startingPage()/100;
-        for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
-        }
-    }
+    // if(selected == 0){
+    //     int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
+    //     for(int i = 0; i < addFood; i++){
+    //         mainPage.menu.bag.addRandomFood();
+    //     }
+    // }
+    // if(selected == 1){
+    //     int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+    //     for(int i = 0; i < addFood; i++){
+    //         mainPage.menu.bag.addRandomFood();
+    //     }
+    // }
+    // if(selected == 2){
+    //     int addFood = this->mainPage.menu.game.locky.startingPage()/100;
+    //     for(int i = 0; i < addFood; i++){
+    //         mainPage.menu.bag.addRandomFood();
+    //     }
+    // }
 }

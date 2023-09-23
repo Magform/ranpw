@@ -5,11 +5,11 @@
 //To add:
 //DataToSave
 
-Interaction inte;
-
 Thread dataSaverThread;
 DataToSave toSave;
-DataSaver kk("save" ,toSave , &dataSaverThread);
+DataSaver kk("save.txt" ,toSave , &dataSaverThread);
+
+Interaction inte(toSave);
 
 int main(){
     Thread krakenLifeThread;

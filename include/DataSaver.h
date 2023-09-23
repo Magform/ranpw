@@ -13,7 +13,6 @@ class DataSaver{
         void saveData();
         void start();
         FILE* saveFile;
-        char key = 'm';
         int oldKrakenHealth = 25;
         int oldKrakenHunger = 25;
         int oldEgg = 0;
