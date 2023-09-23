@@ -1,11 +1,20 @@
 #include "Bag.h"
 #include <random>
+#include "Struct.h"
+
+Bag::Bag(DataToSave dataToBeSaved): dataToSave(dataToBeSaved){
+    Pie = dataToSave.Pie->getValue();
+    Egg = dataToSave.Egg->getValue();
+}
+
 void Bag::addFood(int foodType){
     if(foodType == 0){
         Pie++;
+        dataToSave.Pie->setValue(Pie);
     }
     if(foodType == 1){
         Egg++;
+        dataToSave.Egg->setValue(Egg);
     }
 }
 
@@ -13,10 +22,12 @@ void Bag::addFood(int foodType){
 int Bag::useFood(int foodType){
     if(foodType == 0 && Pie > 0){
         Pie--;
+        dataToSave.Pie->setValue(Pie);
         return 10;
     }
     if(foodType == 1 && Egg>0){
         Egg--;
+        dataToSave.Egg->setValue(Egg);
         return 5;
     }
     return 0;

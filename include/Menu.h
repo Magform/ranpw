@@ -9,11 +9,12 @@ class Menu{
     public:
         Bag bag;
         //App app;
-        Game game;
-        Menu(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
+        //Game game;
+        Menu(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 };
 
-inline Menu::Menu(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer) : 
-    game(lcdPin, joystick, potentiometer){}
+inline Menu::Menu(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer) : 
+    bag(dataToBeSaved){}
+    //game(lcdPin, joystick, potentiometer){}
 
 #endif //Menu_H_

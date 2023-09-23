@@ -8,12 +8,12 @@
 class Page{
     public:
         Kraken kraken;
-        // Menu menu;
+        Menu menu;
         Page(DataToSave dataToBeSaved,lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 
 };
 
-inline Page::Page(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : kraken(dataToBeSaved){}//, menu(lcdPin, joystick, tempSensorPin, potentiometer) {}
+inline Page::Page(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : kraken(dataToBeSaved), menu(dataToBeSaved, lcdPin, joystick, tempSensorPin, potentiometer) {}
 
 
 #endif //Page_H_

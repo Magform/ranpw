@@ -141,16 +141,16 @@ void Interaction::execute(int selected){
                 return;
             }
 
-            // char eggN[10] = "Egg: ";
-            // char pieN[10] = "Pie: ";
-            // char eggCountStr[10];
-            // char pieCountStr[10];
-            // snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
-            // snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
-            // strcat(eggN, eggCountStr);
-            // strcat(pieN, pieCountStr);
+            char eggN[10] = "Egg: ";
+            char pieN[10] = "Pie: ";
+            char eggCountStr[10];
+            char pieCountStr[10];
+            snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
+            snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
+            strcat(eggN, eggCountStr);
+            strcat(pieN, pieCountStr);
 
-            // this->slider({eggN, pieN}, [this](int selected) { this->useFood(selected); }, true);
+            this->slider({eggN, pieN}, [this](int selected) { this->useFood(selected); }, true);
         }
         
     }
@@ -193,12 +193,12 @@ void Interaction::execute(int selected){
 
 
 void Interaction::useFood(int selected){
-    // if(selected == 0){
-    //     mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
-    // }
-    // if(selected == 1){
-    //     mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
-    // }
+    if(selected == 0){
+        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
+    }
+    if(selected == 1){
+        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
+    }
 }
 
 void Interaction::useApp(int selected){
