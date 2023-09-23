@@ -10,8 +10,8 @@ class Game{
         LCatch lcatch;
         // Pong pong;
         // LockY locky;
-        Game(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick, Potentiometer potentiometer);
+        Game(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, Potentiometer potentiometer);
 };      
 
-inline Game::Game(DataToSave dataToBeSaved, lcdPin lcdPin, Joystick joystick, Potentiometer potentiometer) : lcatch(dataToBeSaved, lcdPin, joystick){}//, pong(lcdPin, joystick), locky(lcdPin,  joystick, potentiometer.up, potentiometer.down){}
+inline Game::Game(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, Potentiometer potentiometer) : lcatch(dataToBeSaved, lcdIn, joystick){}//, pong(lcdPin, joystick), locky(lcdPin,  joystick, potentiometer.up, potentiometer.down){}
 #endif //Game_H_
