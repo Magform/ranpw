@@ -1,25 +1,27 @@
 #ifndef DataSaver_H_
 #define DataSaver_H_
 
-#include <fstream>
+#include "mbed.h"
+#include <File.h>
 #include "Struct.h"
 
 class DataSaver{
     public:
-        // DataSaver(const char* saveFileName, CDataToSave toSave, Thread* startThread);
-        DataSaver();
+        DataSaver(const char* saveFileNameP, DataToSave toSave, Thread* startThread);
     private:
-        // void pushOldValue();
-        // void saveData();
-        // void start();
-        // std::fstream saveFile; //it's a problem
-        // char key = 'm';  //it's a problem
+        void pushOldValue();
+        void saveData();
+        void start();
+        FILE* saveFile;
         int oldKrakenHealth = 25;
         int oldKrakenHunger = 25;
         int oldEgg = 0;
         int oldPie = 0;
         int oldLCatchHighScore = 0;
-        // CDataToSave dataToSave; //it's a problem
+        int oldPongHighScore = 0;
+        int oldLockYHighScore = 0;
+        const char* saveFileName = nullptr;
+        DataToSave dataToSave;
 };
 
 #endif //DataSaver_H_

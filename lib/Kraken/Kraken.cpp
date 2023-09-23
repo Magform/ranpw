@@ -4,7 +4,13 @@
 #include "mbed.h"
 #include "Kraken.h"
 
-Kraken::Kraken() {
+Kraken::Kraken(DataToSave dataToBeSaved){
+    dataToSave = dataToBeSaved;
+    health.setValue(dataToSave.KrakenHealth->getValue());
+    hunger.setValue(dataToSave.KrakenHunger->getValue());
+}
+
+Kraken::Kraken(){
     health.setValue(25);
     hunger.setValue(25);
 }
@@ -24,7 +30,6 @@ void Kraken::live(){
     int checkNumber = 0;
     
     int minutesHunger = rand() % 5 + 1;
-
     while(1){
 
         if(checkNumber == minutesHunger){
@@ -49,6 +54,10 @@ void Kraken::live(){
         hunger.setValue(std::max(0, std::min(25, hunger.getValue())));
         health.setValue(std::max(0, std::min(25, health.getValue())));
 
+        //push value to DataSaver
+        dataToSave.KrakenHealth->setValue(health.getValue());
+        dataToSave.KrakenHunger->setValue(hunger.getValue());
+
         checkNumber++;
         ThisThread::sleep_for(60s);
     }
@@ -57,4 +66,6 @@ void Kraken::live(){
 void Kraken::addHunger(int hungerToAdd){
     hunger.addValue(hungerToAdd);
     hunger.setValue(std::max(0, std::min(25, hunger.getValue())));
+
+    dataToSave.KrakenHunger->setValue(hunger.getValue());
 }

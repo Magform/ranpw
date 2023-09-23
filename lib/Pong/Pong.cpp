@@ -1,29 +1,30 @@
 #include "Pong.h"
 
-Pong::Pong(lcdPin lcdPin, Joystick joystickPin) : 
-    lcd(lcdPin.MOSI, lcdPin.SCK, lcdPin.RESET, lcdPin.A0, lcdPin.nCS),
+Pong::Pong(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystickPin) : 
+    lcd(lcdIn),
+    dataToSave(dataToBeSaved),
     joystick(joystickPin){
-        highScore = 0;
+        highScore = dataToSave.PongHighScore->getValue();
 }
 
 
 int Pong::startingPage(){
-    lcd.cls();
+    lcd->cls();
 
     //left arrow
-    lcd.line(5,1,5,7,1);
-    lcd.line(5,1,2,4,1);
-    lcd.line(2,4,5,7,1);
+    lcd->line(5,1,5,7,1);
+    lcd->line(5,1,2,4,1);
+    lcd->line(2,4,5,7,1);
 
     //circle
-    lcd.circle(123,4,2,1);
+    lcd->circle(123,4,2,1);
 
-    lcd.locate(50,0);
-    lcd.printf("Pong");
-    lcd.locate(5,10);
-    lcd.printf("Classic pong with Joystick");
-    lcd.locate(10,20);
-    lcd.printf("1 point = 2 food");
+    lcd->locate(50,0);
+    lcd->printf("Pong");
+    lcd->locate(5,10);
+    lcd->printf("Classic pong with Joystick");
+    lcd->locate(10,20);
+    lcd->printf("1 point = 2 food");
     ThisThread::sleep_for(100ms);
     while(1){
         if(joystick.center.read()){
@@ -37,21 +38,21 @@ int Pong::startingPage(){
 
 int Pong::main(){
     int totalPoints = 0;
-    lcd.cls();
+    lcd->cls();
 
     //left arrow
-    lcd.line(5,1,5,7,1);
-    lcd.line(5,1,2,4,1);
-    lcd.line(2,4,5,7,1);
+    lcd->line(5,1,5,7,1);
+    lcd->line(5,1,2,4,1);
+    lcd->line(2,4,5,7,1);
 
     //circle
-    lcd.circle(123,4,2,1);
+    lcd->circle(123,4,2,1);
 
-    lcd.locate(50,0);
-    lcd.printf("Pong");
+    lcd->locate(50,0);
+    lcd->printf("Pong");
 
-    lcd.locate(35,15);
-    lcd.printf("HighScore: %d", highScore);
+    lcd->locate(35,15);
+    lcd->printf("HighScore: %d", highScore);
 
     bool lastJ = false;
     bool currentJ = false;
@@ -61,9 +62,10 @@ int Pong::main(){
             int gamePoint = game();
             if(gamePoint > highScore){
                 highScore = gamePoint;
-                lcd.cls();
-                lcd.locate(35,15);
-                lcd.printf("NEW HIGHSCORE");
+                dataToSave.PongHighScore->setValue(highScore);
+                lcd->cls();
+                lcd->locate(35,15);
+                lcd->printf("NEW HIGHSCORE");
                 while(1){
                     if(joystick.center.read()){
                         break;
@@ -72,21 +74,21 @@ int Pong::main(){
             }
             totalPoints += gamePoint;
             int totalPoints = 0;
-            lcd.cls();
+            lcd->cls();
 
             //left arrow
-            lcd.line(5,1,5,7,1);
-            lcd.line(5,1,2,4,1);
-            lcd.line(2,4,5,7,1);
+            lcd->line(5,1,5,7,1);
+            lcd->line(5,1,2,4,1);
+            lcd->line(2,4,5,7,1);
 
             //circle
-            lcd.circle(123,4,2,1);
+            lcd->circle(123,4,2,1);
 
-            lcd.locate(50,0);
-            lcd.printf("Pong");
+            lcd->locate(50,0);
+            lcd->printf("Pong");
 
-            lcd.locate(32,12);
-            lcd.printf("HighScore: %d", highScore);
+            lcd->locate(32,12);
+            lcd->printf("HighScore: %d", highScore);
             ThisThread::sleep_for(100ms);
         }
         if(joystick.left.read()){
@@ -97,7 +99,7 @@ int Pong::main(){
 }
 
 int Pong::game(){
-    lcd.cls();
+    lcd->cls();
 
     bool canPoints = true;
     int points = 0;
@@ -144,18 +146,18 @@ int Pong::game(){
         }
         ThisThread::sleep_for(1ms);
     }
-    lcd.cls();
+    lcd->cls();
 
     //circle
-    lcd.circle(123,4,2,1);
+    lcd->circle(123,4,2,1);
 
-    lcd.locate(50,0);
-    lcd.printf("Pong");
+    lcd->locate(50,0);
+    lcd->printf("Pong");
 
-    lcd.locate(32,10);
-    lcd.printf("Game over");
-    lcd.locate(32,20);
-    lcd.printf("Score: %d", points);
+    lcd->locate(32,10);
+    lcd->printf("Game over");
+    lcd->locate(32,20);
+    lcd->printf("Score: %d", points);
     ThisThread::sleep_for(100ms);
     while(1){
         if(joystick.center.read()){
@@ -167,19 +169,19 @@ int Pong::game(){
 
 
 void Pong::drawPlayer(int* centerX, int centerY, int length){
-    lcd.line(centerY ,0 , centerY, 31, 0);
+    lcd->line(centerY ,0 , centerY, 31, 0);
     
     int newXUp  = max(0, min(31-length, *centerX-length/2));
     int newXBot = max(0+length, min(31, *centerX+length/2));
 
     *centerX = newXBot - length/2;
 
-    lcd.line(centerY, newXUp, centerY, newXBot, 1);
+    lcd->line(centerY, newXUp, centerY, newXBot, 1);
 }
 
 
 void Pong::drawBall(float* ballX, float* ballY, float* ballSpeedX, float* ballSpeedY){
-    lcd.pixel((int)*ballY, (int)*ballX, 0);
+    lcd->pixel((int)*ballY, (int)*ballX, 0);
     
     *ballX = *ballX + *ballSpeedX;
     *ballY = *ballY + *ballSpeedY; 
@@ -191,5 +193,5 @@ void Pong::drawBall(float* ballX, float* ballY, float* ballSpeedX, float* ballSp
     *ballX  = max(0.0f, min(31.0f, *ballX));
     *ballY = max(0.0f, min(124.0f, *ballY));
 
-    lcd.pixel((int)*ballY, (int)*ballX, 1);
+    lcd->pixel((int)*ballY, (int)*ballX, 1);
 }

@@ -2,20 +2,19 @@
 #define Menu_H_
 
 #include "Bag.h"
-#include "Credits.h"
 #include "App.h"
 #include "Game.h"
 
 class Menu{
     public:
-        Credits credits;
         Bag bag;
-        App app;
+        //App app;
         Game game;
-        Menu(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
+        Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 };
 
-inline Menu::Menu(lcdPin lcdPin, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer) : 
-    app(lcdPin, joystick, tempSensorPin), game(lcdPin, joystick, potentiometer){}
+inline Menu::Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer) : 
+    bag(dataToBeSaved),
+    game(dataToBeSaved, lcdIn, joystick, potentiometer){}
 
 #endif //Menu_H_

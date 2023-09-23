@@ -3,16 +3,17 @@
 
 #include "Kraken.h"
 #include "Menu.h"
+#include "Struct.h"
 
 class Page{
     public:
         Kraken kraken;
         Menu menu;
-        Page(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
+        Page(DataToSave dataToBeSaved,C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
 
 };
 
-inline Page::Page(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : menu(lcdPin, joystick, tempSensorPin, potentiometer) {}
+inline Page::Page(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : kraken(dataToBeSaved), menu(dataToBeSaved, lcdIn, joystick, tempSensorPin, potentiometer) {}
 
 
 #endif //Page_H_

@@ -4,6 +4,7 @@
 #include "mbed.h"
 #include <C12832.h>
 #include "Page.h"
+#include <vector>
 
 class Interaction{
     private:
@@ -17,7 +18,7 @@ class Interaction{
         void useApp(int selected);
         void useGame(int selected);
     public:
-        Interaction();
+        Interaction(DataToSave dataToBeSaved);
         void start(Thread *krakenLife);
         void mainWork();
 };

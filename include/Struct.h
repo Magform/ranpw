@@ -43,6 +43,8 @@ struct DataToSave{
     ConcurrentData* Egg;
     ConcurrentData* Pie;
     ConcurrentData* LCatchHighScore;
+    ConcurrentData* PongHighScore;
+    ConcurrentData* LockYHighScore;
 
     DataToSave() {
         KrakenHealth = new ConcurrentData();
@@ -50,6 +52,8 @@ struct DataToSave{
         Egg = new ConcurrentData();
         Pie = new ConcurrentData();
         LCatchHighScore = new ConcurrentData();
+        PongHighScore = new ConcurrentData();
+        LockYHighScore = new ConcurrentData();
     }
 };
 

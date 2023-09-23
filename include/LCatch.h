@@ -6,7 +6,8 @@
 
 class LCatch{
     private:
-        C12832 lcd;
+        DataToSave dataToSave;
+        C12832* lcd;
         Joystick joystick;
         int highScore;
         int main();
@@ -14,7 +15,7 @@ class LCatch{
         void randomAppear(int toAppear);
         void buttonWait(DigitalIn button, int* score, bool* lost);
     public:
-        LCatch(lcdPin lcdPin, Joystick joystickPin);
+        LCatch(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystickPin);
         int startingPage();
 };
 
