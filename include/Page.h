@@ -9,11 +9,11 @@ class Page{
     public:
         Kraken kraken;
         Menu menu;
-        Page(DataToSave dataToBeSaved,C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer);
+        Page(DataToSave dataToBeSaved,C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer, MMA7660* accelerometerP);
 
 };
 
-inline Page::Page(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer) : kraken(dataToBeSaved), menu(dataToBeSaved, lcdIn, joystick, tempSensorPin, potentiometer) {}
+inline Page::Page(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer, MMA7660* accelerometerP) : kraken(dataToBeSaved), menu(dataToBeSaved, lcdIn, joystick, tempSensorPin, potentiometer, accelerometerP) {}
 
 
 #endif //Page_H_

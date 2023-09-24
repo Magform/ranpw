@@ -1,9 +1,10 @@
 #include "Pong.h"
 
-Pong::Pong(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystickPin) : 
+Pong::Pong(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystickPin, MMA7660* accelerometerP) : 
     lcd(lcdIn),
     dataToSave(dataToBeSaved),
-    joystick(joystickPin){
+    joystick(joystickPin),
+    accelerometer(accelerometerP){
         highScore = dataToSave.PongHighScore->getValue();
 }
 
@@ -22,7 +23,7 @@ int Pong::startingPage(){
     lcd->locate(50,0);
     lcd->printf("Pong");
     lcd->locate(5,10);
-    lcd->printf("Classic pong with Joystick");
+    lcd->printf("Tilt the device");
     lcd->locate(10,20);
     lcd->printf("1 point = 2 food");
     ThisThread::sleep_for(100ms);
@@ -108,6 +109,7 @@ int Pong::game(){
     float ballX = 15;
     float ballY = 63;
     int playerPadPosition = 15;
+    float playerSpeed = 4;
     int botPadPosition = 15;
     int padLength = 10;
     bool lost = false;
@@ -117,17 +119,17 @@ int Pong::game(){
         drawPlayer(&playerPadPosition, 5, padLength);
         drawPlayer(&botPadPosition, 127-5, padLength);
         drawBall(&ballX, &ballY, &ballSpeedX, &ballSpeedY);
-        if(ballY == 0){
+        if(ballY == 1){
             lost = true;
         }
-        if(ballY >= 127-6){
+        if(ballY >= 127-7){
             ballSpeedY = -ballSpeedY;
             if(ballSpeedY < 2 && points%5 == 0 && points!=0){
                 ballSpeedY = -2;
             }
             canPoints = true;
         }
-        if(canPoints && ballY<=6 && ballY > 4 && ballX > playerPadPosition-padLength/2 && ballX < playerPadPosition+padLength/2){
+        if(canPoints && ballY<=7 && ballY > 5 && ballX+1 > playerPadPosition-padLength/2 && ballX-1 < playerPadPosition+padLength/2){
             ballSpeedY = -ballSpeedY;
             if(ballSpeedX > 0 && ballSpeedX < 3){
                 ballSpeedX = ballSpeedX + 0.2;
@@ -138,12 +140,11 @@ int Pong::game(){
                 padLength --;
             }
         }
-        if(joystick.down.read()){
-            playerPadPosition ++;
-        }
-        if(joystick.up.read()){
-            playerPadPosition --;
-        }
+
+        float aY = accelerometer->y();
+
+        playerPadPosition = playerPadPosition + (int)(aY * playerSpeed);
+
         ThisThread::sleep_for(1ms);
     }
     lcd->cls();
@@ -181,17 +182,17 @@ void Pong::drawPlayer(int* centerX, int centerY, int length){
 
 
 void Pong::drawBall(float* ballX, float* ballY, float* ballSpeedX, float* ballSpeedY){
-    lcd->pixel((int)*ballY, (int)*ballX, 0);
+    lcd->fillcircle((int)*ballY, (int)*ballX, 1, 0);
     
     *ballX = *ballX + *ballSpeedX;
     *ballY = *ballY + *ballSpeedY; 
 
-    if(*ballX <= 0.0f || *ballX >= 31.0f){
+    if(*ballX <= 1.0f || *ballX >= 30.0f){
         *ballSpeedX = -*ballSpeedX;
     }
 
-    *ballX  = max(0.0f, min(31.0f, *ballX));
-    *ballY = max(0.0f, min(124.0f, *ballY));
+    *ballX  = max(1.0f, min(30.0f, *ballX));
+    *ballY = max(1.0f, min(123.0f, *ballY));
 
-    lcd->pixel((int)*ballY, (int)*ballX, 1);
+    lcd->fillcircle((int)*ballY, (int)*ballX, 1, 1);
 }
