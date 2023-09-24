@@ -41,7 +41,7 @@ void Kraken::live(){
                 int healthLoss = rand() % 3 + 1;
                 health.addValue(-healthLoss);
                 if(health.getValue() <= 0){
-                    //Death (to be configured...)
+                    //Death
                 }
             }
         }
@@ -64,8 +64,18 @@ void Kraken::live(){
 }
 
 void Kraken::addHunger(int hungerToAdd){
+    if(health.getValue()==0){
+        return;
+    }
     hunger.addValue(hungerToAdd);
     hunger.setValue(std::max(0, std::min(25, hunger.getValue())));
 
     dataToSave.KrakenHunger->setValue(hunger.getValue());
+}
+
+void Kraken::addHealth(int healthToAdd){
+    health.addValue(healthToAdd);
+    health.setValue(std::max(0, std::min(25, health.getValue())));
+
+    dataToSave.KrakenHealth->setValue(health.getValue());
 }

@@ -2,6 +2,7 @@
 #include "mbed.h"
 #include <chrono>
 #include "Bitmap.h"
+#include "Hell.h"
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
     lcd(p5, p7, p6, p8, p11), 
@@ -226,6 +227,10 @@ void Interaction::useApp(int selected){
 }
 
 void Interaction::useGame(int selected){
+    if(mainPage.kraken.getHealth()==0){
+        Hell gell(&lcd, joystick, &accelerometer);
+        mainPage.kraken.addHealth(gell.startingPage());
+    }
     if(selected == 0){
         int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
         for(int i = 0; i < addFood; i++){

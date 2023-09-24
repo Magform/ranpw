@@ -16,6 +16,7 @@ class Kraken{
         int getHunger();
         void live();
         void addHunger(int hungerToAdd);
+        void addHealth(int healthToAdd);
 };
 
 #endif //Kraken_H_
