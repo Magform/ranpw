@@ -13,6 +13,7 @@ project(ranpw)
 # Build libraries
 add_subdirectory(C12832)
 add_subdirectory(LM75B)
+add_subdirectory(MMA7660)
 
 # Build application
 set(RANPW_SOURCES
@@ -32,7 +33,7 @@ set(RANPW_SOURCES
 
 add_executable(ranpw ${RANPW_SOURCES})
 target_include_directories(ranpw PRIVATE include)
-target_link_libraries(ranpw LM75B C12832 mbed-os mbed-storage)
+target_link_libraries(ranpw LM75B C12832 MMA7660 mbed-os mbed-storage)
 mbed_set_post_build(ranpw)
 
 mbed_finalize_build()

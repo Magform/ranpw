@@ -10,6 +10,7 @@ class Interaction{
     private:
         Page mainPage;
         C12832 lcd;
+        MMA7660 accelerometer;
         Joystick joystick;
         void printMonitor(int selected, vector<char*> options, bool reload = false, bool submenu = false);
         void execute(int selected);
