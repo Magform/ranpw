@@ -69,3 +69,10 @@ void Kraken::addHunger(int hungerToAdd){
 
     dataToSave.KrakenHunger->setValue(hunger.getValue());
 }
+
+void Kraken::addHealth(int healthToAdd){
+    health.addValue(healthToAdd);
+    health.setValue(std::max(0, std::min(25, health.getValue())));
+
+    dataToSave.KrakenHealth->setValue(health.getValue());
+}
