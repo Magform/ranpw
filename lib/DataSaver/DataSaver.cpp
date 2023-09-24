@@ -101,6 +101,7 @@ void DataSaver::saveData() {
     char* dataChar = strdup(data.c_str());
     fprintf(saveFile, dataChar);
     fclose(saveFile);
+    free(dataChar);
 }
 
 void DataSaver::pushOldValue(){
