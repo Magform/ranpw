@@ -1,10 +1,7 @@
 #include "Interaction.h"
 #include "mbed.h"
 #include <chrono>
-
-char krakenBTM[]  = {
-    //Some Kraken Bitmap
-  };
+#include "Bitmap.h"
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
     lcd(p5, p7, p6, p8, p11), 
@@ -20,6 +17,14 @@ void Interaction::start(Thread *krakenLife){
     lcd.printf("RANPW");
     ThisThread::sleep_for(std::chrono::milliseconds(500));
     
+    //print Kraken or tombstone
+    if(mainPage.kraken.getHealth()>0){
+       lcd.print_bm(getKrakenBitmap(), 0,0);
+    }else{
+        lcd.print_bm(getTombstoneBitmap(), 0,0);
+    }
+    lcd.copy_to_lcd();
+
     lcd.cls();
     //Separation Line
     lcd.line(90,0,90,32,1);
@@ -89,6 +94,15 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
     static int oldHunger;
     if(reload ||oldSelected != selected || this->mainPage.kraken.getHealth() != oldHealth || this->mainPage.kraken.getHunger() != oldHunger){
         lcd.cls();
+
+        //print Kraken or tombstone
+        if(mainPage.kraken.getHealth()>0){
+            lcd.print_bm(getKrakenBitmap(), 0,0);
+        }else{
+            lcd.print_bm(getTombstoneBitmap(), 0,0);
+        }
+        lcd.copy_to_lcd();
+
         //Separation Line
         lcd.line(90,0,90,32,1);
         
