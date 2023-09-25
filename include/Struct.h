@@ -27,11 +27,6 @@ struct ledPin{
     PinName led4;
 };
 
-struct tempPin{
-    PinName SCL;
-    PinName SDA;
-};
-
 struct Potentiometer{
     PinName up;
     PinName down;

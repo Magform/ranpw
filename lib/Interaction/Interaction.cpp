@@ -11,7 +11,7 @@ Interaction::Interaction(DataToSave dataToBeSaved) :
     lcd(p5, p7, p6, p8, p11), 
     joystick{p13, p15, p16, p12, p14},
     accelerometer(p28, p27),
-    mainPage(dataToBeSaved, &lcd, {p13, p15, p16, p12, p14}, {p28, p27}, {p20, p19}, &accelerometer)
+    mainPage(dataToBeSaved, &lcd, {p13, p15, p16, p12, p14}, {p20, p19}, &accelerometer)
     {
 }
 
@@ -225,9 +225,6 @@ void Interaction::useApp(int selected){
         Cronometer cronometer(&lcd, joystick);
         cronometer.startingPage();
     }
-    // if(selected == 0){
-    //     this->mainPage.menu.app.termometer.startingPage();
-    // }
 }
 
 void Interaction::useGame(int selected){

@@ -8,12 +8,12 @@
 class Menu{
     public:
         Bag bag;
-        //App app;  //Disable for memory manegent: For more info about this see App.h or documentation
+        //App app;  // This is disable, for more info about this see App.h or documentation
         Game game;
-        Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer, MMA7660* accelerometerP);
+        Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick,  Potentiometer potentiometer, MMA7660* accelerometerP);
 };
 
-inline Menu::Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick,  tempPin tempSensorPin, Potentiometer potentiometer, MMA7660* accelerometerP) : 
+inline Menu::Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, Potentiometer potentiometer, MMA7660* accelerometerP) : 
     bag(dataToBeSaved),
     game(dataToBeSaved, lcdIn, joystick, potentiometer, accelerometerP){}
 

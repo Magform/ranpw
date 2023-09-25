@@ -2,23 +2,23 @@
 
 float roundDecimal(float toRound, int decimalPlace);
 
-Temp::Temp(lcdPin lcdPin, Joystick joystickPin, tempPin tempSensorPin) : 
-    lcd(lcdPin.MOSI, lcdPin.SCK, lcdPin.RESET, lcdPin.A0, lcdPin.nCS),
-    joystick(joystickPin),
-    tempSensor(tempSensorPin.SDA, tempSensorPin.SCL){
+Temp::Temp(C12832* lcdIn, Joystick joystickIn, LM75B* tempSensorIn) : 
+    lcd(lcdIn),
+    joystick(joystickIn),
+    tempSensor(tempSensorIn){
 }
 
 void Temp::startingPage(){
-    lcd.cls();
+    lcd->cls();
 
     //left arrow
-    lcd.line(5,1,5,7,1);
-    lcd.line(5,1,2,4,1);
-    lcd.line(2,4,5,7,1);
+    lcd->line(5,1,5,7,1);
+    lcd->line(5,1,2,4,1);
+    lcd->line(2,4,5,7,1);
 
-    lcd.locate(50,0);
-    lcd.printf("Temp");
-    lcd.locate(0,10);
+    lcd->locate(50,0);
+    lcd->printf("Temp");
+    lcd->locate(0,10);
     while(1){
         main();
         if(joystick.left.read()){
@@ -29,19 +29,19 @@ void Temp::startingPage(){
 
 void Temp::main(){
     static float oldTemperature = 0.0f;
-    if(tempSensor.open()){
-        float temperature = tempSensor.temp();
+    if(tempSensor->open()){
+        float temperature = tempSensor->temp();
         temperature = roundDecimal(temperature, 4);
         if(temperature != oldTemperature){
-            lcd.fillrect(0,10,127,20,0);
-            lcd.locate(0,10);
-            lcd.printf("Temperature: %.4f", temperature);
+            lcd->fillrect(0,10,127,20,0);
+            lcd->locate(0,10);
+            lcd->printf("Temperature: %.4f", temperature);
         }
         oldTemperature = temperature;
     }else{
-        lcd.fillrect(0,10,127,20,0);
-        lcd.locate(0,10);
-        lcd.printf("Error reading sensor");
+        lcd->fillrect(0,10,127,20,0);
+        lcd->locate(0,10);
+        lcd->printf("Error reading sensor");
     }
 
 }

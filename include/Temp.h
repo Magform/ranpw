@@ -8,12 +8,12 @@
 
 class Temp{
     private:
-        C12832 lcd;
+        C12832* lcd;
         Joystick joystick;
         void main();
-        LM75B tempSensor;
+        LM75B* tempSensor;
     public:
-        Temp(lcdPin lcdPin, Joystick joystick, tempPin tempSensorPin);
+        Temp(C12832* lcdIn, Joystick joystickIn, LM75B* tempSensorIn);
         void startingPage();
 };
 
