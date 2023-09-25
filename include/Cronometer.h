@@ -6,11 +6,11 @@
 
 class Cronometer{
     private:
-        C12832 lcd;
+        C12832* lcd;
         Joystick joystick;
         void main();
     public:
-        Cronometer(lcdPin lcdPin, Joystick joystick);
+        Cronometer(C12832* lcdIn, Joystick joystick);
         void startingPage();
 };
 

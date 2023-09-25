@@ -8,7 +8,7 @@
 class Menu{
     public:
         Bag bag;
-        //App app;
+        //App app;  //Disable for memory manegent: For more info about this see App.h or documentation
         Game game;
         Menu(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystick, tempPin tempSensorPin, Potentiometer potentiometer, MMA7660* accelerometerP);
 };
