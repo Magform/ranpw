@@ -36,14 +36,31 @@ int Hell::startingPage(){
 
 int Hell::game(){
     int numberOfDungeon = rand()%5+1;
-    for(int i=0; i<numberOfDungeon; i++){
-        randomDoungeon(6);
+    for(int i=0; i<numberOfDungeon-1; i++){
+        randomDungeon(6);
+    }
+    //easter Egg
+    if(randomDungeon(6)){
+        lcd->cls();
+        //circle
+        lcd->circle(123,4,2,1);
+
+        lcd->locate(0,5);
+        lcd->printf("It's not about the gold,");
+        lcd->locate(0,15);
+        lcd->printf("It's about the glory");
+        ThisThread::sleep_for(100ms);
+        while(1){
+            if(joystick.center.read()){
+                return numberOfDungeon;
+            }
+        }
     }
     return numberOfDungeon;
 }
 
 
-void Hell::randomDoungeon(int radius){
+int Hell::randomDungeon(int radius){
     int playerLocationX = 0;
     int playerLocationY = 0;
     int playerSpeed = 6;
@@ -70,8 +87,11 @@ void Hell::randomDoungeon(int radius){
 
         lcd->fillcircle(endingX, endingY,2, 1);
 
+        if(playerLocationX==endingX && playerLocationY==endingY && accelerometer->z()<0){
+            return 1;
+        }
         if(playerLocationX==endingX && playerLocationY==endingY){
-            return;
+            return 0;
         }
         ThisThread::sleep_for(100ms);
     }

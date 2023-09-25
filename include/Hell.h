@@ -11,7 +11,7 @@ class Hell{
         MMA7660* accelerometer;
         Joystick joystick;
         int game();
-        void randomDoungeon(int radius);
+        int randomDungeon(int radius);
     public:
         Hell(C12832* lcdIn, Joystick joystickPin, MMA7660* accelerometerP);
         int startingPage();
