@@ -2,23 +2,23 @@
 
 std::string convertFromNanoMilliseconds(std::chrono::microseconds input);
 
-Cronometer::Cronometer(lcdPin lcdPin, Joystick joystickPin) : 
-    lcd(lcdPin.MOSI, lcdPin.SCK, lcdPin.RESET, lcdPin.A0, lcdPin.nCS),
+Cronometer::Cronometer(C12832* lcdIn, Joystick joystickPin) : 
+    lcd(lcdIn),
     joystick(joystickPin){
 }
 
 void Cronometer::startingPage(){
-    lcd.cls();
+    lcd->cls();
 
     //left arrow
-    lcd.line(5,1,5,7,1);
-    lcd.line(5,1,2,4,1);
-    lcd.line(2,4,5,7,1);
+    lcd->line(5,1,5,7,1);
+    lcd->line(5,1,2,4,1);
+    lcd->line(2,4,5,7,1);
 
-    lcd.locate(50,0);
-    lcd.printf("Cronometer");
-    lcd.locate(0,10);
-    lcd.printf("Start/Stop -> Joystick central button");
+    lcd->locate(50,0);
+    lcd->printf("Cronometer");
+    lcd->locate(0,10);
+    lcd->printf("Start/Stop -> Joystick central button");
     ThisThread::sleep_for(100ms);
     while(1){
         if(joystick.center.read()){
@@ -39,18 +39,18 @@ void Cronometer::main(){
     Timer timer;
     bool started = false;
     int cicle = 0; //to make screen not update always
-    lcd.cls();
+    lcd->cls();
 
     //left arrow
-    lcd.line(5,1,5,7,1);
-    lcd.line(5,1,2,4,1);
-    lcd.line(2,4,5,7,1);
+    lcd->line(5,1,5,7,1);
+    lcd->line(5,1,2,4,1);
+    lcd->line(2,4,5,7,1);
 
-    lcd.locate(40,14);
-    lcd.printf("00:00:00.000");
+    lcd->locate(40,14);
+    lcd->printf("00:00:00.000");
 
-    lcd.locate(50,0);
-    lcd.printf("Cronometer");
+    lcd->locate(50,0);
+    lcd->printf("Cronometer");
     while(1){
         button_state = joystick.center.read();
         if(button_state && !last_button_state && !started){
@@ -58,13 +58,13 @@ void Cronometer::main(){
             started = true;
         }else if(button_state && !last_button_state && started){
             timer.stop();
-            lcd.locate(40,14);
-            lcd.printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
+            lcd->locate(40,14);
+            lcd->printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
             started = false;
         }else if(started){
-            lcd.fillrect(0,10,127,31,0);
-            lcd.locate(40,14);
-            lcd.printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
+            lcd->fillrect(0,10,127,31,0);
+            lcd->locate(40,14);
+            lcd->printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
         }else if(joystick.left.read()){
             return;
         }
