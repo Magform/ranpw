@@ -1,3 +1,14 @@
+//Why is this class disabled?
+/*
+We decide to disable this class to provide better optimization, 
+It is therefore preferable to initialize the class only when needed, 
+thus avoiding it remaining initialized if not in use.
+
+The same reasoning could be made for the Game.h class but, for now,
+to keep the code tidier and more easily understandable,we decided 
+to leave it implemented
+*/
+
 #ifndef App_H_
 #define App_H_
 
