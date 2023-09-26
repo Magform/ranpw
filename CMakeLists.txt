@@ -17,6 +17,7 @@ add_subdirectory(MMA7660)
 
 # Build application
 set(RANPW_SOURCES
+    lib/Hell/Hell.cpp
     lib/LockY/LockY.cpp
     lib/DataSaver/DataSaver.cpp
     lib/Bag/Bag.cpp

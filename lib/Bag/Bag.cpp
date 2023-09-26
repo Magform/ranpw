@@ -18,17 +18,16 @@ void Bag::addFood(int foodType){
     }
 }
 
-// Function to use food from the bag
 int Bag::useFood(int foodType){
     if(foodType == 0 && Pie > 0){
         Pie--;
         dataToSave.Pie->setValue(Pie);
-        return 10;
+        return 10;  //hunger given by this food
     }
     if(foodType == 1 && Egg>0){
         Egg--;
         dataToSave.Egg->setValue(Egg);
-        return 5;
+        return 5;  //hunger given by this food
     }
     return 0;
 }

@@ -7,8 +7,8 @@
 class LCatch{
     private:
         DataToSave dataToSave;
-        C12832* lcd;
         Joystick joystick;
+        C12832* lcd;
         int highScore;
         int main();
         int game();

@@ -6,6 +6,7 @@
 #include "Page.h"
 #include <vector>
 
+//Class that manages the main screen and all interactions with the user on it
 class Interaction{
     private:
         Page mainPage;

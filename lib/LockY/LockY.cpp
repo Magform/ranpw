@@ -9,8 +9,8 @@ LockY::LockY(DataToSave dataToBeSaved, C12832* lcdIn, Joystick joystickPin, PinN
     lcd(lcdIn),
     joystick(joystickPin),
     dataToSave(dataToBeSaved),
-    potentiometerUP(potenUp),
-    potentiometerDown(potenDown){
+    potentiometerDown(potenDown),
+    potentiometerUP(potenUp){
         highScore = dataToSave.LockYHighScore->getValue();
 }
 
@@ -124,7 +124,6 @@ int LockY::main(){
                 }
             }
             totalPoints += gamePoint;
-            int totalPoints = 0;
             lcd->cls();
 
             //left arrow
@@ -163,8 +162,8 @@ int LockY::game(){
     float leftSafe = rand01();
     float rightSafe = rand01();
 
-    lcd->line(0,15,127,15,1);
     //safe
+    lcd->line(0,15,127,15,1);
     lcd->line(floatToLine(leftSafe), 15, floatToLine(leftSafe, true), 15, 0);
     lcd->line(floatToLine(rightSafe), 15, floatToLine(rightSafe, true), 15, 0);
 
@@ -173,7 +172,7 @@ int LockY::game(){
         float pot1 = potentiometerDown.read();
         float pot2 = potentiometerUP.read();
 
-        //decoder
+        //Safe decoder
         lcd->line(0,16,127,16,0);
         lcd->line(0,14,127,14,0);
         lcd->line(floatToLine(pot1), 16, floatToLine(pot1, true), 16, 1);
@@ -189,7 +188,7 @@ int LockY::game(){
 
     lcd->cls();
 
-
+    //calculate score based in elapsed time
     int score = (int)(1000/((timer.elapsed_time()).count()/1000000));
     //circle
     lcd->circle(123,4,2,1);
@@ -209,12 +208,12 @@ int LockY::game(){
 }
 
 
-int floatToLine(float toAngle, bool second){
+int floatToLine(float toLine, bool second){
     if(second){
-        int toReturn = (int)(toAngle * 100)+10;
+        int toReturn = (int)(toLine * 100)+10;
         return toReturn;
     }
-    return (int)(toAngle * 100);
+    return (int)(toLine * 100);
 }
 
 

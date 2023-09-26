@@ -9,8 +9,8 @@
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
     lcd(p5, p7, p6, p8, p11), 
-    joystick{p13, p15, p16, p12, p14},
     accelerometer(p28, p27),
+    joystick{p13, p15, p16, p12, p14},
     mainPage(dataToBeSaved, &lcd, {p13, p15, p16, p12, p14}, {p20, p19}, &accelerometer)
     {
 }
@@ -54,17 +54,16 @@ void Interaction::start(Thread *krakenLife){
     lcd.rect(53,27,80,30,1);
     lcd.fillrect(52,27,54 + this->mainPage.kraken.getHunger(),30,1);
 
+    //Start a thread with the Kraken life, so kraken health and Hunger can always change
     krakenLife->start(callback([&]() {this->mainPage.kraken.live();}));
 }
 
-void Interaction::mainWork(){
-    slider({"Bag", "Games", "Apps", "Credits"}, [this](int selected) { this->execute(selected); });
-}
-
+//Class that implement manage all the option that can be choose in the left slider so it needs all the option, the function to be runned when something is selected and if it's a sub menu or not
 void Interaction::slider(vector<char*> options, std::function<void(int)> toRun, bool submenu) {
     int selected = 0;
     lcd.locate(0,0);
     ThisThread::sleep_for(std::chrono::milliseconds(100));
+    //call printMonitor to print the whole screen
     printMonitor(selected, options, true, submenu);
     while (1) {
         if (this->joystick.down) {
@@ -91,7 +90,7 @@ void Interaction::slider(vector<char*> options, std::function<void(int)> toRun, 
     }
 }
 
-
+//Function that print whole screen
 void Interaction::printMonitor(int selected, vector<char*> options, bool reload, bool submenu){
     static int oldSelected;
     static int oldHealth;
@@ -129,7 +128,7 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
             lcd.line(104,25,114,25,1);
         }
         
-        //Write first data
+        //Write slider option
         lcd.locate(95,12);
         lcd.printf("%s", options[selected]);
 
@@ -151,6 +150,10 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
     }
 }
 
+//Main menu
+void Interaction::mainWork(){
+    slider({"Bag", "Games", "Apps", "Credits"}, [this](int selected) { this->execute(selected); });
+}
 
 void Interaction::execute(int selected){
     if(selected == 0){

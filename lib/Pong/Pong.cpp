@@ -122,6 +122,7 @@ int Pong::game(){
         if(ballY == 1){
             lost = true;
         }
+        //Ball bounce on bot slider
         if(ballY >= 127-7){
             ballSpeedY = -ballSpeedY;
             if(ballSpeedY < 2 && points%5 == 0 && points!=0){
@@ -129,6 +130,7 @@ int Pong::game(){
             }
             canPoints = true;
         }
+        //Ball bounce on player slider
         if(canPoints && ballY<=7 && ballY > 5 && ballX+1 > playerPadPosition-padLength/2 && ballX-1 < playerPadPosition+padLength/2){
             ballSpeedY = -ballSpeedY;
             if(ballSpeedX > 0 && ballSpeedX < 3){
@@ -187,6 +189,7 @@ void Pong::drawBall(float* ballX, float* ballY, float* ballSpeedX, float* ballSp
     *ballX = *ballX + *ballSpeedX;
     *ballY = *ballY + *ballSpeedY; 
 
+    //ball bounce on edges of the screen
     if(*ballX <= 1.0f || *ballX >= 30.0f){
         *ballSpeedX = -*ballSpeedX;
     }

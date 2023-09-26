@@ -1,6 +1,6 @@
 #include "Cronometer.h"
 
-std::string convertFromNanoMilliseconds(std::chrono::microseconds input);
+std::string microsecondsToString(std::chrono::microseconds input);
 
 Cronometer::Cronometer(C12832* lcdIn, Joystick joystickPin) : 
     lcd(lcdIn),
@@ -38,7 +38,6 @@ void Cronometer::main(){
     
     Timer timer;
     bool started = false;
-    int cicle = 0; //to make screen not update always
     lcd->cls();
 
     //left arrow
@@ -59,22 +58,23 @@ void Cronometer::main(){
         }else if(button_state && !last_button_state && started){
             timer.stop();
             lcd->locate(40,14);
-            lcd->printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
+            lcd->printf("%s", microsecondsToString(timer.elapsed_time()).c_str());
             started = false;
         }else if(started){
             lcd->fillrect(0,10,127,31,0);
             lcd->locate(40,14);
-            lcd->printf("%s", convertFromNanoMilliseconds(timer.elapsed_time()).c_str());
+            lcd->printf("%s", microsecondsToString(timer.elapsed_time()).c_str());
         }else if(joystick.left.read()){
             return;
         }
-        cicle++;
         last_button_state = button_state;
     }
 }
 
 
-std::string convertFromNanoMilliseconds(std::chrono::microseconds input){
+//convert a std::chrono:microseconds to a string like hh:mm:ss:msms
+
+std::string microsecondsToString(std::chrono::microseconds input){
 
     long long milliseconds = input.count() / 1000 ;
 

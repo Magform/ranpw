@@ -41,7 +41,7 @@ void Kraken::live(){
                 int healthLoss = rand() % 3 + 1;
                 health.addValue(-healthLoss);
                 if(health.getValue() <= 0){
-                    //Death
+                    //Death is not managed here
                 }
             }
         }
@@ -64,6 +64,7 @@ void Kraken::live(){
 }
 
 void Kraken::addHunger(int hungerToAdd){
+    //if health is 0 you can't add food
     if(health.getValue()==0){
         return;
     }

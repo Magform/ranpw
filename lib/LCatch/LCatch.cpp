@@ -109,6 +109,7 @@ int LCatch::main(){
         currentJ = joystick.center.read();
         if(currentJ && !lastJ){
             int gamePoint = game();
+            //highscore management
             if(gamePoint > highScore){
                 highScore = gamePoint;
                 dataToSave.LCatchHighScore->setValue(highScore);
@@ -202,6 +203,7 @@ void LCatch::buttonWait(DigitalIn button, int* score, bool* lost){
     int counting = 0;
     static bool pastButtonState = false;
     bool actualButtonState = false;
+    //More points user have less time it have to push the correct button
     while(counting < 400-((*score)*10) && !find){
         actualButtonState = button.read();
         if(actualButtonState && !pastButtonState){
@@ -213,6 +215,7 @@ void LCatch::buttonWait(DigitalIn button, int* score, bool* lost){
         pastButtonState = actualButtonState;
         ThisThread::sleep_for(1ms);
     }
+
     if(!find){
         *lost = true;
     }else{
@@ -222,6 +225,7 @@ void LCatch::buttonWait(DigitalIn button, int* score, bool* lost){
     }
 }
 
+//Show the value toAppear on a random position on the screen
 void LCatch::randomAppear(int toAppear){
     int randomX = rand()%10+12;
     int randomY = rand()%2;

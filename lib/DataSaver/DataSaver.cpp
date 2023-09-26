@@ -31,7 +31,7 @@ DataSaver::DataSaver(const char* saveFileNameP, DataToSave toSave, Thread* start
             // terminate
             fclose(saveFile);
 
-            //check if data is valid
+            //check if data is valid and if yes ste oldValue to the value in the text file
             if (charOccurrency(data, '|') == 6) {
                 char* value = strtok(data, "|");
                 oldKrakenHealth = std::stoi(value);
@@ -86,6 +86,7 @@ void DataSaver::start() {
 }
 
 
+//Function that save data in the choosen file
 void DataSaver::saveData() {
     LocalFileSystem local("local");
     remove(saveFileName);
@@ -104,6 +105,7 @@ void DataSaver::saveData() {
     free(dataChar);
 }
 
+//Function to load oldValue in dataToSave so it can be accessed from the other classes
 void DataSaver::pushOldValue(){
     dataToSave.KrakenHealth->setValue(oldKrakenHealth);
     dataToSave.KrakenHunger->setValue(oldKrakenHunger);

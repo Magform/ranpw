@@ -5,6 +5,7 @@
 #include <File.h>
 #include "Struct.h"
 
+//Class that takes care of saving all the necessary data in a text file and reloading it at startup
 class DataSaver{
     public:
         DataSaver(const char* saveFileNameP, DataToSave toSave, Thread* startThread);
@@ -13,6 +14,8 @@ class DataSaver{
         void saveData();
         void start();
         FILE* saveFile;
+        const char* saveFileName = nullptr;
+        //initialzie all old data with default value
         int oldKrakenHealth = 25;
         int oldKrakenHunger = 25;
         int oldEgg = 0;
@@ -20,7 +23,6 @@ class DataSaver{
         int oldLCatchHighScore = 0;
         int oldPongHighScore = 0;
         int oldLockYHighScore = 0;
-        const char* saveFileName = nullptr;
         DataToSave dataToSave;
 };
 

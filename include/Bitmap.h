@@ -3,8 +3,6 @@
 
 #include <C12832.h>
 
-//Im using function to gain more memory optimization (without static also better but I cant)
-
 Bitmap getKrakenBitmap(){
     static char Kraken[] = {
         0x00, 0x03, 0xc0, 0x00,

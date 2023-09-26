@@ -2,8 +2,8 @@
 
 Hell::Hell(C12832* lcdIn, Joystick joystickPin, MMA7660* accelerometerP) : 
     lcd(lcdIn),
-    joystick(joystickPin),
-    accelerometer(accelerometerP){
+    accelerometer(accelerometerP),
+    joystick(joystickPin){
 }
 
 
@@ -20,7 +20,7 @@ int Hell::startingPage(){
 
     lcd->locate(40,0);
     lcd->printf("WELCOME TO");
-    lcd->locate(53,15);
+    lcd->locate(55,15);
     lcd->printf("HELL");
     ThisThread::sleep_for(100ms);
     while(1){
@@ -39,10 +39,11 @@ int Hell::game(){
     for(int i=0; i<numberOfDungeon-1; i++){
         randomDungeon(6);
     }
-    //easter Egg
+
+    //Easter Egg
     if(randomDungeon(6)){
         lcd->cls();
-        //circle
+
         lcd->circle(123,4,2,1);
 
         lcd->locate(0,5);
@@ -56,6 +57,7 @@ int Hell::game(){
             }
         }
     }
+
     return numberOfDungeon;
 }
 
@@ -66,7 +68,6 @@ int Hell::randomDungeon(int radius){
     int playerSpeed = 6;
     int endingX = rand()%(128-2*radius)+radius;
     int endingY = rand()%(32-2*radius)+radius;
-    bool win = false;
 
     lcd->cls();
     lcd->fillrect(0,0,127,31,1);
@@ -74,7 +75,7 @@ int Hell::randomDungeon(int radius){
     lcd->pixel(playerLocationX, playerLocationY, 1);
     lcd->pixel(endingX, endingY, 1);
 
-    while(!win){
+    while(1){
         lcd->fillcircle(playerLocationX, playerLocationY, radius, 1);
         playerLocationX -= (int)(accelerometer->x() * playerSpeed);
         playerLocationY += (int)(accelerometer->y() * playerSpeed);
@@ -87,9 +88,11 @@ int Hell::randomDungeon(int radius){
 
         lcd->fillcircle(endingX, endingY,2, 1);
 
+        //Easter egg
         if(playerLocationX==endingX && playerLocationY==endingY && accelerometer->z()<0){
             return 1;
         }
+
         if(playerLocationX==endingX && playerLocationY==endingY){
             return 0;
         }
