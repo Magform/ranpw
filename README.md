@@ -27,6 +27,10 @@ The joystick plays a pivotal role in navigating through all application interfac
 
 Both potentiometers are integral to specific user interactions, with one notably enhancing gameplay in the LockY game. The control of these potentiometers is streamlined through the APIs provided by "mbed.h," as detailed [here](https://os.mbed.com/docs/mbed-os/v6.16/apis/index.html).
 
+### Temperature sensor: LM75BD
+
+The LM75BD temperature sensor is utilized in the "Termometer" application to capture environmental temperature data. The sensor is integrated into the project using the [LM75B.h](https://os.mbed.com/users/chris/code/LM75B/) library, with minor modifications to ensure compatibility with the Embed OS CE platform.
+
 ### Accelerometer: MMA7660
 
 The MMA7660 accelerometer contributes significantly to user interactions, particularly in the Hell and Pong games. To collect data from this component, the [MMA7660.h](https://os.mbed.com/teams/components/code/MMA7660/) library has been employed with slight modifications to align it with the project's requirements.
