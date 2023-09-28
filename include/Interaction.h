@@ -3,16 +3,21 @@
 
 #include "mbed.h"
 #include <C12832.h>
-#include "Page.h"
+#include <MMA7660.h>
 #include <vector>
+#include "Bag.h"
+#include "Kraken.h"
+#include "Struct.h"
 
 //Class that manages the main screen and all interactions with the user on it
 class Interaction{
     private:
-        Page mainPage;
+        Bag bag;
         C12832 lcd;
         MMA7660 accelerometer;
         Joystick joystick;
+        DataToSave dataToSave;
+        Kraken kraken;
         void printMonitor(int selected, vector<char*> options, bool reload = false, bool submenu = false);
         void execute(int selected);
         void slider(vector<char*> options, std::function<void(int)> toRun, bool submenu = false);

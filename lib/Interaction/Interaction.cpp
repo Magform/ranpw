@@ -3,15 +3,21 @@
 #include <chrono>
 #include "Bitmap.h"
 
-//App and Hell (For more info about this see App.h)
+//All Games
 #include "Hell.h"
+#include "LCatch.h"
+#include "LockY.h"
+#include "Pong.h"
+//All apps
 #include "Cronometer.h"
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
+    bag(dataToBeSaved),
     lcd(p5, p7, p6, p8, p11), 
     accelerometer(p28, p27),
     joystick{p13, p15, p16, p12, p14},
-    mainPage(dataToBeSaved, &lcd, {p13, p15, p16, p12, p14}, {p20, p19}, &accelerometer)
+    dataToSave(dataToBeSaved),
+    kraken(dataToSave)
     {
 }
 
@@ -22,7 +28,7 @@ void Interaction::start(Thread *krakenLife){
     ThisThread::sleep_for(std::chrono::milliseconds(500));
     
     //print Kraken or tombstone
-    if(mainPage.kraken.getHealth()>0){
+    if(kraken.getHealth()>0){
        lcd.print_bm(getKrakenBitmap(), 0,0);
     }else{
         lcd.print_bm(getTombstoneBitmap(), 0,0);
@@ -46,16 +52,16 @@ void Interaction::start(Thread *krakenLife){
     lcd.locate(53, 2);
     lcd.printf("Health");
     lcd.rect(53,12,80,15,1);
-    lcd.fillrect(52,12,54 + this->mainPage.kraken.getHealth(),15,1);
+    lcd.fillrect(52,12,54 + kraken.getHealth(),15,1);
 
     //Hunger bar
     lcd.locate(53, 17);
     lcd.printf("Hunger");
     lcd.rect(53,27,80,30,1);
-    lcd.fillrect(52,27,54 + this->mainPage.kraken.getHunger(),30,1);
+    lcd.fillrect(52,27,54 + kraken.getHunger(),30,1);
 
     //Start a thread with the Kraken life, so kraken health and Hunger can always change
-    krakenLife->start(callback([&]() {this->mainPage.kraken.live();}));
+    krakenLife->start(callback([&]() {kraken.live();}));
 }
 
 //Class that implement manage all the option that can be choose in the left slider so it needs all the option, the function to be runned when something is selected and if it's a sub menu or not
@@ -95,11 +101,11 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
     static int oldSelected;
     static int oldHealth;
     static int oldHunger;
-    if(reload ||oldSelected != selected || this->mainPage.kraken.getHealth() != oldHealth || this->mainPage.kraken.getHunger() != oldHunger){
+    if(reload ||oldSelected != selected || kraken.getHealth() != oldHealth || kraken.getHunger() != oldHunger){
         lcd.cls();
 
         //print Kraken or tombstone
-        if(mainPage.kraken.getHealth()>0){
+        if(kraken.getHealth()>0){
             lcd.print_bm(getKrakenBitmap(), 0,0);
         }else{
             lcd.print_bm(getTombstoneBitmap(), 0,0);
@@ -136,17 +142,17 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
         lcd.locate(53, 2);
         lcd.printf("Health");
         lcd.rect(53,12,80,15,1);
-        lcd.fillrect(52,12,54 + this->mainPage.kraken.getHealth(),15,1);
+        lcd.fillrect(52,12,54 + kraken.getHealth(),15,1);
 
         //Hunger bar
         lcd.locate(53, 17);
         lcd.printf("Hunger");
         lcd.rect(53,27,80,30,1);
-        lcd.fillrect(52,27,54 + this->mainPage.kraken.getHunger(),30,1);
+        lcd.fillrect(52,27,54 + kraken.getHunger(),30,1);
 
         oldSelected = selected;
-        oldHealth = this->mainPage.kraken.getHealth();
-        oldHunger = this->mainPage.kraken.getHunger();
+        oldHealth = kraken.getHealth();
+        oldHunger = kraken.getHunger();
     }
 }
 
@@ -167,8 +173,8 @@ void Interaction::execute(int selected){
             char pieN[10] = "Pie: ";
             char eggCountStr[10];
             char pieCountStr[10];
-            snprintf(eggCountStr, sizeof(eggCountStr), "%d", mainPage.menu.bag.getFood(1));
-            snprintf(pieCountStr, sizeof(pieCountStr), "%d", mainPage.menu.bag.getFood(0));
+            snprintf(eggCountStr, sizeof(eggCountStr), "%d", bag.getFood(1));
+            snprintf(pieCountStr, sizeof(pieCountStr), "%d", bag.getFood(0));
             strcat(eggN, eggCountStr);
             strcat(pieN, pieCountStr);
 
@@ -216,10 +222,10 @@ void Interaction::execute(int selected){
 
 void Interaction::useFood(int selected){
     if(selected == 0){
-        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(1));
+        kraken.addHunger(bag.useFood(1));
     }
     if(selected == 1){
-        mainPage.kraken.addHunger(mainPage.menu.bag.useFood(0));
+        kraken.addHunger(bag.useFood(0));
     }
 }
 
@@ -231,26 +237,29 @@ void Interaction::useApp(int selected){
 }
 
 void Interaction::useGame(int selected){
-    if(mainPage.kraken.getHealth()==0){
+    if(kraken.getHealth()==0){
         Hell gell(&lcd, joystick, &accelerometer);
-        mainPage.kraken.addHealth(gell.startingPage());
+        kraken.addHealth(gell.startingPage());
     }
     if(selected == 0){
-        int addFood = this->mainPage.menu.game.lcatch.startingPage()/10;
+        LCatch lcatch(dataToSave, &lcd, joystick);
+        int addFood = lcatch.startingPage()/10;
         for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
+            bag.addRandomFood();
         }
     }
     if(selected == 1){
-        int addFood = this->mainPage.menu.game.pong.startingPage()*2;
+        Pong pong(dataToSave, &lcd, joystick, &accelerometer);
+        int addFood = pong.startingPage()*2;
         for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
+           bag.addRandomFood();
         }
     }
     if(selected == 2){
-        int addFood = this->mainPage.menu.game.locky.startingPage()/100;
+        LockY locky(dataToSave, &lcd, joystick, p19, p20);
+        int addFood = locky.startingPage()/100;
         for(int i = 0; i < addFood; i++){
-            mainPage.menu.bag.addRandomFood();
+            bag.addRandomFood();
         }
     }
 }
