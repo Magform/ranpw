@@ -146,6 +146,16 @@ Consider redesigning all the game components to have a common superclass, promot
 
 Similarly, create a superclass for apps within the project to standardize their structure and behavior, making it easier to add new apps.
 
+### Add more app
+
+#### Mouse
+
+An app that give the ranpw the ability to simulate a mouse, users can interact with their computer systems by controlling the mouse cursor's movement and clicks directly from RANPW. 
+
+#### Rduck
+
+An app that, give the script thanks to a USB stick, it allows the device, to emulate the behavior of a "Rubber Ducky.
+
 ### Music to evrything
 
 Integrate music and sound effects into various aspects of the project to enhance the overall user experience and immersion.
