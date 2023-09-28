@@ -1,4 +1,3 @@
-//NOT USED~~~
 #ifndef Temp_H_
 #define Temp_H_
 
@@ -11,8 +10,9 @@ class Temp{
     private:
         C12832* lcd;
         Joystick joystick;
-        void main();
         LM75B* tempSensor;
+        int time = 0;
+        void main(int minTemp = -280, bool restart = false);
     public:
         Temp(C12832* lcdIn, Joystick joystickIn, LM75B* tempSensorIn);
         void startingPage();
