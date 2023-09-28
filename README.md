@@ -2,18 +2,18 @@
 
 ## Table of Contents
 
-1. [Project Overview](#Project Overview)
-2. [Used hardware and Library](#Used hardware and Library)
-3. [Thread overview](Thread overview)
-4. [Implementation Analysis](#Implementation Analysis)
-5. [How to install](#How to install)
-6. [Future improvements](#Future improvements)
+1. [Project Overview](#project-overview)
+2. [Used hardware and Library](#used-hardware-and-library)
+3. [Thread overview](#thread-overview)
+4. [Implementation Analysis](#implementation-analysis)
+5. [How to install](#how-to-install)
+6. [Future improvements](#future-improvements)
 
-## Project Overview
+## Project overview
 
 The central concept behind the RANPW project is to create a dynamic, Tamagotchi-inspired tool enriched with a selection of games (LCatch, Pong, and LockY) and productivity applications (Cronometer). This versatile platform encourages high modularity, enabling individuals with basic C++ knowledge to seamlessly develop and incorporate their custom apps and games. RANPW is designed to operate on the mbed NXP LPC1768 microcontroller, coupled with the mbed application board.
 
-## Used hardware and Library
+## Used hardware and library
 
 ### LCD: C12832
 
@@ -35,19 +35,19 @@ The MMA7660 accelerometer contributes significantly to user interactions, partic
 
 At startup, RANPW initializes three distinct threads to manage various aspects of its functionality:
 
-### Thread 1: User Interface and Interaction
+### Thread 1: User Iiterface and interaction
 
 This thread is responsible for overseeing the entire user interface and facilitating interaction with end-users. It dynamically creates and initializes instances of all apps and games while orchestrating their display on the LCD screen. Further insights into this thread's workings can be found in the Interaction.h and Interaction.cpp files.
 
-### Thread 2: Kraken's Management
+### Thread 2: Kraken's management
 
 Thread 2 operates on a straightforward principle, employing basic rand() functions to introduce wait times of 1 to 5 minutes. During these intervals, it randomly decreases the pet's hunger by a value ranging from 1 to 5. Should the hunger level plummet to zero, the pet's life diminishes at varying rates—1, 2, or 3 points per minute. Conversely, if hunger surpasses 20, the pet gains 1 life point. Notably, both life and hunger levels have a cap of 25. Detailed insights into this thread's functionality are available in the live() function within Kraken.cpp.
 
-### Thread 3: Data Saving Management
+### Thread 3: Data saving management
 
 Thread 3 operates with a clear focus on data integrity. It consistently monitors the data stored in the members of the ConcurrentData structure. This structure is vital for ensuring safe data access across multiple threads. When disparities between the stored data and in-memory data are detected, Thread 3 takes action, overwriting the data and saving the respective file in the device's internal memory.
 
-## Implementation Analysis
+## Implementation analysis
 
 In the process of realizing the RANPW project, I've meticulously crafted 15 different classes to lay the foundation for its functionality and modularity. Each of these components plays a specific role in the project's architecture:
 
@@ -175,7 +175,7 @@ Implement user settings that allow users to control music and sound effects, gra
 
 ### Hardware
 
-#### 3D printable Case
+#### 3D printable case
 
 Design and create a 3D-printable case for the project.
 
