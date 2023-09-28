@@ -120,6 +120,10 @@ Remember that if you add something new to the project you need also to add it to
 
 ## Future improvements
 
+### Secure data storage
+
+Enhance data security by implementing minor encryption measures for all saved data. This safeguard prevents unauthorized user modifications and ensures data integrity.
+
 ### Code refactoring
 
 Optimize and streamline the codebase with the following refactorings:
