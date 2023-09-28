@@ -28,7 +28,7 @@ set(RANPW_SOURCES
     lib/Kraken/Kraken.cpp
     lib/LCatch/LCatch.cpp
     lib/Pong/Pong.cpp
-    lib/Temp/Temp.cpp
+    lib/Termometer/Termometer.cpp
     main.cpp)
 
 

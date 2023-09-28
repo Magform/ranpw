@@ -10,9 +10,11 @@
 #include "Pong.h"
 //All apps
 #include "Cronometer.h"
+#include "Termometer.h"
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
     bag(dataToBeSaved),
+    tempSensor(p28, p27),
     lcd(p5, p7, p6, p8, p11), 
     accelerometer(p28, p27),
     joystick{p13, p15, p16, p12, p14},
@@ -115,6 +117,7 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
         //Separation Line
         lcd.line(90,0,90,32,1);
         
+        //left arrow
         if(submenu){
             lcd.line(95,1,95,7,1);
             lcd.line(95,1,92,4,1);
@@ -197,7 +200,7 @@ void Interaction::execute(int selected){
             if(this->joystick.left){
                 return;
             }
-            this->slider({"Cron"}, [this](int selected) { this->useApp(selected); }, true);
+            this->slider({"Cron", "Temp"}, [this](int selected) { this->useApp(selected); }, true);
         }
     }
     if(selected == 3){
@@ -234,12 +237,17 @@ void Interaction::useApp(int selected){
         Cronometer cronometer(&lcd, joystick);
         cronometer.startingPage();
     }
+    if(selected == 1){
+        Termometer termometer(&lcd, joystick, &tempSensor);
+        termometer.startingPage();
+    }
 }
 
 void Interaction::useGame(int selected){
     if(kraken.getHealth()==0){
         Hell gell(&lcd, joystick, &accelerometer);
         kraken.addHealth(gell.startingPage());
+        return;
     }
     if(selected == 0){
         LCatch lcatch(dataToSave, &lcd, joystick);

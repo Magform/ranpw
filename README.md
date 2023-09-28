@@ -67,7 +67,6 @@ The Interaction class serves as the central hub for user interface management. I
 
 The Kraken class embodies the behavior and lifecycle of the virtual pet, monitoring key metrics such as hunger and life. It simulates the pet's interactions with the user.
 
-
 ### Bag
 
 The Bag class manages the virtual inventory system, allowing users to collect and interact with food items within the application. It enhances gameplay and engagement.
@@ -94,9 +93,9 @@ In Pong, player use the accelerometer as a unique input method to control the pa
 Hell is a captivating minigame tucked within the RANPW project, offering a distinctive twist on the gaming experience. Unlike other games, Hell only surfaces when the Kraken's life reaches zero, triggering the Kraken's respawn process.
 Distinguished by its lack of a tutorial, Hell immerses players in a realm where they need to discover how to play by hiself
 
-### Temp
+### Termometer
 
-The Temp class represents a f component in the project's architecture. It serves as a versatile foundation for future developments and experimentation.
+This class allow users to monitor temperature levels in their environment. What sets this component apart is its ability to visualize temperature data through a graph.
 
 ## How to install
 
@@ -116,10 +115,6 @@ In particular I recommend, once the [development environment](https://github.com
 Remember that if you add something new to the project you need also to add it to the CMakeList.txt file
 
 ## Future improvements
-
-### Fix Temp
-
-Address issues in the "Temp" component to ensure its proper functionality and integrate it within the project.
 
 ### Code refactoring
 

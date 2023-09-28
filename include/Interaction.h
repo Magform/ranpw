@@ -4,6 +4,7 @@
 #include "mbed.h"
 #include <C12832.h>
 #include <MMA7660.h>
+#include <LM75B.h>
 #include <vector>
 #include "Bag.h"
 #include "Kraken.h"
@@ -13,6 +14,7 @@
 class Interaction{
     private:
         Bag bag;
+        LM75B tempSensor;
         C12832 lcd;
         MMA7660 accelerometer;
         Joystick joystick;
