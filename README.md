@@ -1,5 +1,13 @@
 # Project Report in ET095G: RANPW
 
+## Table of Contents
+
+1. [Project Overview](#Project Overview)
+2. [Used hardware and Library](#Used hardware and Library)
+3. [Thread overview](Thread overview)
+4. [Implementation Analysis](#Implementation Analysis)
+5. [How to install](#How to install)
+6. [Future improvements](#Future improvements)
 
 ## Project Overview
 
@@ -122,7 +130,7 @@ In particular I recommend, once the [development environment](https://github.com
 
 Remember that if you add something new to the project you need also to add it to the CMakeList.txt file
 
-## Other improvement
+## Future improvements
 
 ### Fix Temp
 
