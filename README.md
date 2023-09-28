@@ -63,29 +63,14 @@ The DataSaver class is responsible for handling data saving and data loading ope
 
 The Interaction class serves as the central hub for user interface management. It oversees the creation and initialization of app and game instances, orchestrates their display on the LCD screen, and manages user input via various hardware interfaces.
 
-### Page
-
-The Page class facilitates the organization and modularity of the code by providing a class where all the classes used within the page can be found
-
 ### Kraken
 
 The Kraken class embodies the behavior and lifecycle of the virtual pet, monitoring key metrics such as hunger and life. It simulates the pet's interactions with the user.
 
-### Menu
-
-The Menu class, very similarry to Page, facilitates the organization and modularity of the code by providing a class where all the things on the Menu can be found.
 
 ### Bag
 
 The Bag class manages the virtual inventory system, allowing users to collect and interact with food items within the application. It enhances gameplay and engagement.
-
-### App
-
-The Menu class facilitates the organization and modularity of the code by providing a class where all the different App are stored.
-
-### Game
-
-The Menu class facilitates the organization and modularity of the code by providing a class where all the different App are stored.
 
 ### Cronometer
 
@@ -139,11 +124,6 @@ Address issues in the "Temp" component to ensure its proper functionality and in
 ### Code refactoring
 
 Optimize and streamline the codebase with the following refactorings:
-
-#### Remove Menu
-
-Simplify the code structure by eliminating the "Menu" class and its associated classes ie Game ad App.
-In this new approach, both games and apps will be managed in a manner similar to how apps are currently constructed and deconstructed when needed. This restructured approach simplifies the codebase and promotes memory efficiency.
 
 #### Game as superclass
 
