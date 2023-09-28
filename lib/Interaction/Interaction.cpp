@@ -10,7 +10,7 @@
 #include "Pong.h"
 //All apps
 #include "Cronometer.h"
-#include "Temp.h"
+#include "Termometer.h"
 
 Interaction::Interaction(DataToSave dataToBeSaved) : 
     bag(dataToBeSaved),
@@ -238,7 +238,7 @@ void Interaction::useApp(int selected){
         cronometer.startingPage();
     }
     if(selected == 1){
-        Temp termometer(&lcd, joystick, &tempSensor);
+        Termometer termometer(&lcd, joystick, &tempSensor);
         termometer.startingPage();
     }
 }

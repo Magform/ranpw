@@ -1,16 +1,16 @@
-#include "Temp.h"
+#include "Termometer.h"
 
 #define dataDelay 500 //How meny time between two data
 
 float roundDecimal(float toRound, int decimalPlace);
 
-Temp::Temp(C12832* lcdIn, Joystick joystickIn, LM75B* tempSensorIn) : 
+Termometer::Termometer(C12832* lcdIn, Joystick joystickIn, LM75B* tempSensorIn) : 
     lcd(lcdIn),
     joystick(joystickIn),
     tempSensor(tempSensorIn){
 }
 
-void Temp::startingPage(){
+void Termometer::startingPage(){
     while(1){
         main();
         if(joystick.left.read()){
@@ -19,7 +19,7 @@ void Temp::startingPage(){
     }
 }
 
-void Temp::main(int newMinTemp, bool restart){
+void Termometer::main(int newMinTemp, bool restart){
     if(tempSensor->open()){
         static int minTemp = 0;
         static int maxTemp = 0;
