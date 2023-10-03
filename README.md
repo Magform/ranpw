@@ -11,13 +11,13 @@
 
 ## Project overview
 
-The central concept behind the RANPW project is to create a dynamic, Tamagotchi-inspired tool enriched with a selection of games (LCatch, Pong, and LockY) and productivity applications (Cronometer). This versatile platform encourages high modularity, enabling individuals with basic C++ knowledge to seamlessly develop and incorporate their custom apps and games. RANPW is designed to operate on the mbed NXP LPC1768 microcontroller, coupled with the mbed application board.
+The central concept behind the RANPW project is to create a dynamic, Tamagotchi-inspired tool enriched with a selection of games (LCatch, Pong, and LockY) and productivity applications (Cronometer and Termometer). This versatile platform encourages high modularity, enabling individuals with basic C++ knowledge to seamlessly develop and incorporate their custom apps and games. RANPW is designed to operate on the mbed NXP LPC1768 microcontroller, coupled with the mbed application board.
 
 ## Used hardware and library
 
 ### LCD: C12832
 
-The 32x128 pixel LCD display serves as the primary visual interface for all interactions within the application. To achieve seamless control over the display, I've customized the [C1832.h](https://os.mbed.com/teams/components/code/C12832/) library to ensure compatibility with the project's broader software ecosystem.
+The 32x128 pixel LCD display serves as the primary visual interface for all interactions within the application. To achieve seamless control over the display, I've customized the [C12832.h](https://os.mbed.com/teams/components/code/C12832/) library to ensure compatibility with the project's broader software ecosystem.
 
 ### Joystick
 
@@ -39,9 +39,9 @@ The MMA7660 accelerometer contributes significantly to user interactions, partic
 
 At startup, RANPW initializes three distinct threads to manage various aspects of its functionality:
 
-### Thread 1: User Iiterface and interaction
+### Thread 1: User iterface and interaction
 
-This thread is responsible for overseeing the entire user interface and facilitating interaction with end-users. It dynamically creates and initializes instances of all apps and games while orchestrating their display on the LCD screen. Further insights into this thread's workings can be found in the Interaction.h and Interaction.cpp files.
+This thread is responsible for overseeing the entire user interface and facilitating interaction with end-users. It dynamically creates and initializes instances of all apps and games while orchestrating their display on the LCD screen. Further insights into this thread's workings can be found in the Ranpw.h and Ranpw.cpp files.
 
 ### Thread 2: Kraken's management
 
@@ -63,9 +63,9 @@ This essential structure serves as the backbone for managing concurrent data acc
 
 The DataSaver class is responsible for handling data saving and data loading operations, ensuring that changes to critical data are persistently stored in the device's internal memory.
 
-### Interaction
+### Ranpw
 
-The Interaction class serves as the central hub for user interface management. It oversees the creation and initialization of app and game instances, orchestrates their display on the LCD screen, and manages user input via various hardware interfaces.
+The Ranpw class serves as the central hub for user interface management. It oversees the creation and initialization of app and game instances, orchestrates their display on the LCD screen, and manages user input via various hardware interfaces.
 
 ### Kraken
 

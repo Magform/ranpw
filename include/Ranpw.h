@@ -1,5 +1,5 @@
-#ifndef Interaction_H_
-#define Interaction_H_
+#ifndef Ranpw_H_
+#define Ranpw_H_
 
 #include "mbed.h"
 #include <C12832.h>
@@ -11,7 +11,7 @@
 #include "Struct.h"
 
 //Class that manages the main screen and all interactions with the user on it
-class Interaction{
+class Ranpw{
     private:
         Bag bag;
         LM75B tempSensor;
@@ -27,9 +27,9 @@ class Interaction{
         void useApp(int selected);
         void useGame(int selected);
     public:
-        Interaction(DataToSave dataToBeSaved);
+        Ranpw(DataToSave dataToBeSaved);
         void start(Thread *krakenLife);
         void mainWork();
 };
 
-#endif //Interaction_H_
+#endif //Ranpw_H_

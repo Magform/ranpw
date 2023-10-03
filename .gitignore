@@ -122,3 +122,8 @@ build.ninja
 *.cmake
 *.ld
 .mbed
+
+#local docs
+docs/*.png
+docs/*.mp4
+docs/*.osp

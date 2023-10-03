@@ -1,4 +1,4 @@
-#include "Interaction.h"
+#include "Ranpw.h"
 #include "mbed.h"
 #include <chrono>
 #include "Bitmap.h"
@@ -12,7 +12,7 @@
 #include "Cronometer.h"
 #include "Termometer.h"
 
-Interaction::Interaction(DataToSave dataToBeSaved) : 
+Ranpw::Ranpw(DataToSave dataToBeSaved) : 
     bag(dataToBeSaved),
     tempSensor(p28, p27),
     lcd(p5, p7, p6, p8, p11), 
@@ -23,7 +23,7 @@ Interaction::Interaction(DataToSave dataToBeSaved) :
     {
 }
 
-void Interaction::start(Thread *krakenLife){
+void Ranpw::start(Thread *krakenLife){
     lcd.cls();
     lcd.locate(50, 10);
     lcd.printf("RANPW");
@@ -67,7 +67,7 @@ void Interaction::start(Thread *krakenLife){
 }
 
 //Class that implement manage all the option that can be choose in the left slider so it needs all the option, the function to be runned when something is selected and if it's a sub menu or not
-void Interaction::slider(vector<char*> options, std::function<void(int)> toRun, bool submenu) {
+void Ranpw::slider(vector<char*> options, std::function<void(int)> toRun, bool submenu) {
     int selected = 0;
     lcd.locate(0,0);
     ThisThread::sleep_for(std::chrono::milliseconds(100));
@@ -99,7 +99,7 @@ void Interaction::slider(vector<char*> options, std::function<void(int)> toRun, 
 }
 
 //Function that print whole screen
-void Interaction::printMonitor(int selected, vector<char*> options, bool reload, bool submenu){
+void Ranpw::printMonitor(int selected, vector<char*> options, bool reload, bool submenu){
     static int oldSelected;
     static int oldHealth;
     static int oldHunger;
@@ -160,11 +160,11 @@ void Interaction::printMonitor(int selected, vector<char*> options, bool reload,
 }
 
 //Main menu
-void Interaction::mainWork(){
+void Ranpw::mainWork(){
     slider({"Bag", "Games", "Apps", "Credits"}, [this](int selected) { this->execute(selected); });
 }
 
-void Interaction::execute(int selected){
+void Ranpw::execute(int selected){
     if(selected == 0){
         lcd.cls();
         while(1){
@@ -223,7 +223,7 @@ void Interaction::execute(int selected){
 }
 
 
-void Interaction::useFood(int selected){
+void Ranpw::useFood(int selected){
     if(selected == 0){
         kraken.addHunger(bag.useFood(1));
     }
@@ -232,7 +232,7 @@ void Interaction::useFood(int selected){
     }
 }
 
-void Interaction::useApp(int selected){
+void Ranpw::useApp(int selected){
     if(selected == 0){
         Cronometer cronometer(&lcd, joystick);
         cronometer.startingPage();
@@ -243,7 +243,7 @@ void Interaction::useApp(int selected){
     }
 }
 
-void Interaction::useGame(int selected){
+void Ranpw::useGame(int selected){
     if(kraken.getHealth()==0){
         Hell gell(&lcd, joystick, &accelerometer);
         kraken.addHealth(gell.startingPage());

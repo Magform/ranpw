@@ -1,23 +1,20 @@
 #include "mbed.h"
-#include "Interaction.h"
+#include "Ranpw.h"
 #include "DataSaver.h"
-
-//To add:
-//DataToSave
 
 Thread dataSaverThread;
 DataToSave toSave;
-DataSaver kk("save.txt" ,toSave , &dataSaverThread);
+DataSaver dataSaver("save.txt" ,toSave , &dataSaverThread);
 
-Interaction inte(toSave);
+Ranpw ranpw(toSave);
 
 int main(){
     Thread krakenLifeThread;
     Thread menuThread;
 
-    inte.start(&krakenLifeThread);
+    ranpw.start(&krakenLifeThread);
     
-    menuThread.start(callback([&]() {inte.mainWork();}));
+    menuThread.start(callback([&]() {ranpw.mainWork();}));
 
 
     while(1){

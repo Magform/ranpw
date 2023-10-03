@@ -24,7 +24,7 @@ set(RANPW_SOURCES
     lib/ConcurrentData/ConcurrentData.cpp
     lib/Cronometer/Cronometer.cpp
     lib/DataSaver/DataSaver.cpp
-    lib/Interaction/Interaction.cpp
+    lib/Ranpw/Ranpw.cpp
     lib/Kraken/Kraken.cpp
     lib/LCatch/LCatch.cpp
     lib/Pong/Pong.cpp
