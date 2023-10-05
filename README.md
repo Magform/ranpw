@@ -1,4 +1,4 @@
-# Project Report in ET095G: RANPW
+# RANPW
 
 ## Table of Contents
 

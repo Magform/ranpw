@@ -124,6 +124,4 @@ build.ninja
 .mbed
 
 #local docs
-docs/*.png
-docs/*.mp4
-docs/*.osp
+docs/YT
