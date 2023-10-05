@@ -2,27 +2,27 @@
 
 ## 1 Hardware
 
-### 1.1 LCD (C12832)
+#### LCD (C12832)
 
 The C12832 LCD is controlled using a customized [C12832.h](https://os.mbed.com/teams/components/code/C12832/) library, ensuring compatibility with the project's software ecosystem. It is used to display game graphics, app interfaces, and visual feedback.
 
-### 1.2 Joystick
+####  Joystick
 
 The joystick is managed through APIs provided by [mbed.h](https://os.mbed.com/docs/mbed-os/v6.16/apis/index.html) and is used for navigation, menu selection, and game control. It facilitates smooth user interaction.
 
-### 1.3 Potentiometers
+#### Potentiometers
 
 Potentiometers are utilized for game controls and interactions, offering analog input. [mbed.h](https://os.mbed.com/docs/mbed-os/v6.16/apis/index.html) APIs are employed to handle these components, enhancing gameplay experiences.
 
-### 1.4 Temperature Sensor (LM75BD)
+####  Temperature Sensor (LM75BD)
 
 The LM75BD temperature sensor is integrated into the "Termometer" application using the [LM75B.h](https://os.mbed.com/users/chris/code/LM75B/) library, with slight modifications to ensure compatibility. It captures temperature data and presents it to users in a visually appealing manner.
 
-### 1.5 Accelerometer (MMA7660)
+####  Accelerometer (MMA7660)
 
 The MMA7660 accelerometer is employed in the Hell and Pong games, capturing user input for game control. The [MMA7660.h](https://os.mbed.com/teams/components/code/MMA7660/) library is adapted to align with project requirements.
 
-### 1.6 Local storage
+#### Local storage
 
 Local storage is essential for saving user data and application state. DataSaver class handles data saving and loading operations, ensuring that critical data, such as high scores and Kraken's details, is persistently stored in the device's internal memory.
 

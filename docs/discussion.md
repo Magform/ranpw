@@ -15,7 +15,6 @@ To achieve this, I delved into various optimization techniques to maximize the e
 
 ## 2 Future plan
 
-In the future we plan:
 
 ### 2.1 Secure data storage
 
