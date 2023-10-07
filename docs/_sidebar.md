@@ -1,4 +1,5 @@
 - [Ranpw](README)
 - [Implementation analysis](implementation_analysis)
 - [Discussion](discussion)
+- [Installation](installation)
 - [useful links](useful_links)
