@@ -1,5 +1,7 @@
 - [Ranpw](README)
 - [Implementation analysis](implementation_analysis)
 - [Discussion](discussion)
+- [UML diagram](uml)
 - [Installation](installation)
+- [Image](image)
 - [useful links](useful_links)
