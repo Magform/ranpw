@@ -4,4 +4,4 @@
 - [UML diagram](uml)
 - [Installation](installation)
 - [Image](image)
-- [useful links](useful_links)
+- [Useful links](useful_links)
