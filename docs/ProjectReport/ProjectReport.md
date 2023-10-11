@@ -1,7 +1,8 @@
 # Project Report in ET095G: RANPW
 
 **Full Name:** Nicolas Ferraresso
-**Date:** Octorber 4, 2023
+
+**Date:** Octorber 7, 2023
 
 ## Table of Contents
 
